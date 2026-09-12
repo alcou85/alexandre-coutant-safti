@@ -50,7 +50,7 @@ export default async function handler(req, res) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY)
     await resend.emails.send({
-      from:    'notifications@votre-domaine.fr', // à remplacer
+      from:    'notifications@coutant-immobilier-vendee.fr',
       to:      process.env.EMAIL_TO,
       subject: `[Contact] Message de ${nom.trim()}`,
       html: `

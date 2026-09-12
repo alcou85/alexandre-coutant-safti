@@ -95,7 +95,7 @@ export default async function handler(req, res) {
   try {
     const resend = new Resend(process.env.RESEND_API_KEY)
     await resend.emails.send({
-      from:    'notifications@votre-domaine.fr', // à remplacer par votre domaine vérifié Resend
+      from:    'notifications@coutant-immobilier-vendee.fr',
       to:      process.env.EMAIL_TO,
       subject: `[Lead] Nouveau contact – ${source === 'hors_zone' ? 'Hors zone' : 'Estimation'}`,
       html:    buildEmailHtml({ ...leadRow }),

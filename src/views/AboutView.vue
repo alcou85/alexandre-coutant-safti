@@ -4,10 +4,15 @@
     <!-- Portrait -->
     <section class="section section--first">
       <div class="container portrait-inner">
-        <!-- Photo placeholder -->
+        <!-- Photo -->
         <div class="photo-wrap">
-          <div class="photo-placeholder" role="img" aria-label="Photo d'Alexandre Coutant">
-            <span class="photo-initials">AC</span>
+          <div class="photo-frame">
+            <img v-if="!photoError" :src="photoSrc"
+              alt="Alexandre Coutant, conseiller immobilier SAFTI à La Roche-sur-Yon" class="photo-img"
+              @error="photoError = true" />
+            <div v-else class="photo-placeholder" aria-hidden="true">
+              <span class="photo-initials">AC</span>
+            </div>
           </div>
           <div class="photo-caption">
             <p class="photo-name">Alexandre Coutant</p>
@@ -18,57 +23,32 @@
 
         <!-- Bio -->
         <div class="bio-content">
-          <h1>Alexandre Coutant</h1>
-          <p class="bio-tagline">Conseiller immobilier indépendant – Réseau SAFTI</p>
+          <h1>Alexandre Coutant, conseiller immobilier à La Roche-sur-Yon</h1>
+          <p class="bio-tagline">Conseiller immobilier indépendant – Réseau SAFTI – Vendée</p>
 
           <div class="bio-text">
             <p>
-              [Votre biographie ici — parcours professionnel, motivations, expertise locale…]
+              Basé à La Roche-sur-Yon, j'accompagne les particuliers dans leurs projets
+              immobiliers en Vendée : vente, achat, estimation. Mon objectif est de rendre
+              chaque transaction simple, transparente et adaptée à votre situation.
             </p>
             <p>
-              [Décrivez votre expérience, votre connaissance du marché vendéen, les raisons
-              qui vous ont amené à rejoindre le réseau SAFTI, et ce qui vous distingue
-              dans votre accompagnement des vendeurs et acquéreurs.]
+              En tant que conseiller indépendant affilié au réseau SAFTI, je bénéficie
+              des outils et de la notoriété d'un grand réseau national, tout en conservant
+              la proximité et la réactivité d'un professionnel qui connaît son territoire.
+              Que vous vendiez une maison, un appartement en centre-ville ou un terrain
+              en périphérie de La Roche-sur-Yon, je vous accompagne à chaque étape.
+            </p>
+            <p>
+              La relation de confiance est au cœur de mon approche : je vous apporte
+              une estimation honnête basée sur les données réelles du marché, des conseils
+              clairs et un suivi personnalisé jusqu'à la signature chez le notaire.
             </p>
           </div>
 
           <div class="bio-actions">
             <RouterLink to="/estimation" class="btn-primary">Estimer mon bien</RouterLink>
             <RouterLink to="/contact" class="btn-outline">Me contacter</RouterLink>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Mon territoire -->
-    <section class="section section--alt">
-      <div class="container territory-inner">
-        <div class="territory-text">
-          <h2>Mon territoire</h2>
-          <p>
-            J'interviens principalement sur <strong>La Roche-sur-Yon</strong>,
-            <strong>Les Sables-d'Olonne</strong> et leurs communes alentours,
-            en département de la <strong>Vendée (85)</strong>.
-          </p>
-          <p>
-            Ma connaissance fine du tissu local — des quartiers, des prix pratiqués,
-            des délais de vente — me permet de vous accompagner efficacement,
-            que vous soyez vendeur ou acquéreur.
-          </p>
-        </div>
-
-        <div class="territory-highlights">
-          <div class="territory-card">
-            <h3>La Roche-sur-Yon</h3>
-            <p>Préfecture de la Vendée, marché dynamique centre-ville et périphérie.</p>
-          </div>
-          <div class="territory-card">
-            <h3>Les Sables-d'Olonne</h3>
-            <p>Marché côtier, résidences principales et secondaires, secteur prisé.</p>
-          </div>
-          <div class="territory-card">
-            <h3>Les communes alentours</h3>
-            <p>Challans, Fontenay-le-Comte, Luçon, l'Île-d'Olonne et les communes rurales du 85.</p>
           </div>
         </div>
       </div>
@@ -90,11 +70,11 @@
             tout en conservant la proximité et la réactivité d'un professionnel local.
           </p>
           <p>
-            <strong>N° RSAC :</strong> <span class="placeholder-value">[À COMPLÉTER]</span>
+            <strong>N° RSAC :</strong> 105 775 613 RSAC La Roche-sur-Yon
           </p>
           <p>
             <strong>Carte professionnelle :</strong>
-            <span class="placeholder-value">[À COMPLÉTER — délivrée par CCI]</span>
+            CPI 3101 2018 000 025 936 — délivrée par la CCI de Toulouse (réseau SAFTI)
           </p>
         </div>
       </div>
@@ -119,7 +99,43 @@
 </template>
 
 <script setup>
-// No dynamic data
+import { ref } from 'vue'
+import { useSeo } from '../composables/useSeo.js'
+import { SITE } from '../config/seo.js'
+
+const photoError = ref(false)
+const photoSrc = '/images/alexandre-coutant.jpeg'
+
+useSeo({
+  title: 'Alexandre Coutant – Conseiller Immobilier SAFTI La Roche-sur-Yon',
+  description:
+    "Découvrez le profil d'Alexandre Coutant, conseiller immobilier indépendant SAFTI basé à La Roche-sur-Yon (Vendée). Vente, achat, estimation : un accompagnement personnalisé à La Roche-sur-Yon et en Vendée.",
+  canonical: `${SITE.url}/qui-suis-je`,
+  jsonLd: [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Alexandre Coutant',
+      jobTitle: 'Conseiller immobilier indépendant',
+      worksFor: {
+        '@type': 'Organization',
+        name: 'SAFTI',
+        url: 'https://www.safti.fr',
+      },
+      url: `${SITE.url}/qui-suis-je`,
+      email: SITE.email,
+      telephone: SITE.phone,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: SITE.city,
+        postalCode: SITE.postalCode,
+        addressRegion: SITE.department,
+        addressCountry: SITE.country,
+      },
+      sameAs: [SITE.saftiProfileUrl],
+    },
+  ],
+})
 </script>
 
 <style scoped>
@@ -167,21 +183,36 @@
   gap: 1rem;
 }
 
-.photo-placeholder {
+.photo-frame {
   width: 180px;
   height: 220px;
-  background-color: var(--color-primary);
   border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 @media (min-width: 768px) {
-  .photo-placeholder {
+  .photo-frame {
     width: 220px;
     height: 280px;
   }
+}
+
+.photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .photo-initials {

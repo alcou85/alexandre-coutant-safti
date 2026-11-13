@@ -305,8 +305,8 @@ function handleNext() {
 
 .form-optional {
   font-size: 0.78rem;
-  color: var(--color-muted);
-  font-weight: 400;
+  color: var(--color-accent);
+  font-weight: 500;
 }
 
 .field-narrow {

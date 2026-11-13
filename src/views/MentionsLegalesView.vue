@@ -11,21 +11,21 @@
             <li><strong>Nom :</strong> Alexandre Coutant</li>
             <li><strong>Qualité :</strong> Conseiller immobilier indépendant</li>
             <li><strong>Réseau :</strong> SAFTI</li>
-            <li><strong>Adresse :</strong> <span class="placeholder">[À COMPLÉTER]</span></li>
+            <li><strong>Adresse :</strong> La Roche-sur-Yon (85000), Vendée</li>
             <li>
               <strong>Téléphone :</strong>
-              <a href="tel:+33XXXXXXXXX">+33 X XX XX XX XX</a>
+              <a href="tel:+33665087707">06 65 08 77 07</a>
             </li>
             <li>
               <strong>Email :</strong>
-              <a href="mailto:contact@alexandrecoutant-safti.fr">contact@alexandrecoutant-safti.fr</a>
+              <a href="mailto:alexandre.coutant@safti.fr">alexandre.coutant@safti.fr</a>
             </li>
             <li>
-              <strong>N° RSAC :</strong> <span class="placeholder">[À COMPLÉTER]</span>
+              <strong>N° RSAC :</strong> 105 775 613 RSAC La Roche-sur-Yon
             </li>
             <li>
               <strong>Carte professionnelle :</strong>
-              <span class="placeholder">[À COMPLÉTER — délivrée par la CCI de rattachement]</span>
+              CPI 3101 2018 000 025 936 — délivrée par la CCI de Toulouse (réseau SAFTI) — valable jusqu'au 28/02/2027
             </li>
           </ul>
         </section>
@@ -44,7 +44,7 @@
 
         <section class="legal-section">
           <h2>Responsable de la publication</h2>
-          <p>Alexandre Coutant — <span class="placeholder">[À COMPLÉTER]</span></p>
+          <p>Alexandre Coutant — <a href="mailto:alexandre.coutant@safti.fr">alexandre.coutant@safti.fr</a></p>
         </section>
 
         <section class="legal-section">

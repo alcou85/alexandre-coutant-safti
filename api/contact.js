@@ -3,7 +3,7 @@ import { getSupabaseAdmin, hashIp, getClientIp, checkRateLimit, validateHoneypot
 import { ESTIMATION_CONFIG as C } from '../src/config/estimation.js'
 
 export default async function handler(req, res) {
-  setCorsHeaders(res)
+  setCorsHeaders(res, req)
   if (handleOptions(req, res)) return
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' })
 

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://www.coutant-immobilier-vendee.fr/sitemap.xml

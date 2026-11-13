@@ -82,6 +82,7 @@ import { reactive, computed } from 'vue'
 import Step1Address from './Step1Address.vue'
 import Step2Property from './Step2Property.vue'
 import Step3Result from './Step3Result.vue'
+import { computeEstimation } from '@/composables/useEstimation.js'
 
 // 'capture' = hors-zone leads are still captured (contact form shown)
 // 'block'   = hors-zone users cannot proceed past step 1
@@ -169,43 +170,22 @@ async function submitEstimate() {
   state.error = null
   state.result = null
 
-  // Hors zone in capture mode: skip API call, go straight to contact form
+  // Hors zone en mode capture : pas d'estimation, juste le formulaire de contact
   if (state.hors_zone && HORS_ZONE_MODE === 'capture') {
     state.loading = false
     return
   }
 
   try {
-    const body = {
-      type: state.type,
-      surface: Number(state.surface),
-      chambres: state.chambres,
-      etat: state.etat,
-      lat: state.lat,
-      lon: state.lon,
+    state.result = await computeEstimation({
+      type:         state.type,
+      surface:      Number(state.surface),
+      etat:         state.etat,
+      plain_pied:   state.plain_pied,
+      garage:       state.garage,
+      terrain:      state.terrain !== '' && state.terrain !== null ? Number(state.terrain) : null,
       code_commune: state.code_commune,
-      code_postal: state.code_postal,
-      plain_pied: state.plain_pied,
-      garage: state.garage,
-      terrain: state.terrain !== '' && state.terrain !== null ? Number(state.terrain) : null,
-      etage: state.etage !== '' && state.etage !== null ? Number(state.etage) : null,
-      ascenseur: state.ascenseur,
-      honeypot: '',
-    }
-
-    const response = await fetch('/api/estimate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
     })
-
-    if (!response.ok) {
-      const data = await response.json().catch(() => ({}))
-      throw new Error(data.error || `Erreur serveur (${response.status})`)
-    }
-
-    const data = await response.json()
-    state.result = data
   } catch (err) {
     state.error = err.message || 'Une erreur inattendue est survenue. Veuillez réessayer.'
   } finally {
@@ -218,7 +198,13 @@ async function submitEstimate() {
 .wizard {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .wizard {
+    gap: 2.5rem;
+  }
 }
 
 /* Progress bar */
@@ -306,7 +292,7 @@ async function submitEstimate() {
   background-color: var(--color-white);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
-  padding: 2rem;
+  padding: 1.25rem;
   box-shadow: var(--shadow-sm);
 }
 

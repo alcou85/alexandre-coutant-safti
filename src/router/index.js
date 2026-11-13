@@ -17,6 +17,21 @@ const routes = [
     component: () => import('../views/AboutView.vue'),
   },
   {
+    path: '/immobilier-la-roche-sur-yon',
+    name: 'local-la-roche',
+    component: () => import('../views/LocalLaRocheView.vue'),
+  },
+  {
+    path: '/actualites',
+    name: 'blog',
+    component: () => import('../views/BlogView.vue'),
+  },
+  {
+    path: '/actualites/:slug',
+    name: 'article',
+    component: () => import('../views/ArticleView.vue'),
+  },
+  {
     path: '/biens-a-vendre',
     beforeEnter: () => {
       const url = import.meta.env.VITE_SAFTI_LISTINGS_URL || '/'
@@ -42,7 +57,8 @@ const routes = [
   },
   {
     path: '/:pathMatch(.*)*',
-    redirect: '/',
+    name: 'not-found',
+    component: () => import('../views/NotFoundView.vue'),
   },
 ]
 

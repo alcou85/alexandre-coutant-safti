@@ -1,31 +1,58 @@
 <template>
-  <footer class="footer">
+  <footer
+    class="footer"
+    itemscope
+    itemtype="https://schema.org/RealEstateAgent"
+  >
     <div class="container footer-body">
       <!-- Left: Identity -->
       <div class="footer-col">
-        <p class="footer-name">Alexandre Coutant</p>
-        <p class="footer-role">Conseiller immobilier indépendant</p>
+        <p class="footer-name" itemprop="name">Alexandre Coutant</p>
+        <p class="footer-role" itemprop="jobTitle">Conseiller immobilier indépendant</p>
         <p class="footer-network">Réseau SAFTI</p>
         <ul class="footer-contact-list">
           <li>
-            <a href="tel:+33XXXXXXXXX" class="footer-link">+33 X XX XX XX XX</a>
+            <a href="tel:+33665087707" class="footer-link" itemprop="telephone">
+              06 65 08 77 07
+            </a>
           </li>
           <li>
-            <a href="mailto:contact@alexandrecoutant-safti.fr" class="footer-link">
-              contact@alexandrecoutant-safti.fr
+            <a
+              href="mailto:alexandre.coutant@safti.fr"
+              class="footer-link"
+              itemprop="email"
+            >
+              alexandre.coutant@safti.fr
+            </a>
+          </li>
+          <li v-if="gbpUrl">
+            <a
+              :href="gbpUrl"
+              class="footer-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Avis Google ★ 4,8 / 5
             </a>
           </li>
         </ul>
-        <p class="footer-area">La Roche-sur-Yon · Les Sables-d'Olonne · Vendée (85)</p>
+        <p class="footer-area">
+          La Roche-sur-Yon · Vendée (85)
+        </p>
       </div>
 
       <!-- Right: Nav links -->
       <nav class="footer-col footer-nav" aria-label="Navigation secondaire">
+        <RouterLink to="/actualites" class="footer-link">Actualités immobilières</RouterLink>
+        <RouterLink to="/immobilier-la-roche-sur-yon" class="footer-link">
+          Immobilier La Roche-sur-Yon
+        </RouterLink>
+        <RouterLink to="/qui-suis-je" class="footer-link">Qui suis-je ?</RouterLink>
+        <RouterLink to="/contact" class="footer-link">Contact</RouterLink>
         <RouterLink to="/mentions-legales" class="footer-link">Mentions légales</RouterLink>
         <RouterLink to="/politique-confidentialite" class="footer-link">
           Politique de confidentialité
         </RouterLink>
-        <RouterLink to="/contact" class="footer-link">Contact</RouterLink>
         <RouterLink to="/estimation" class="footer-link footer-link--accent">
           Estimer mon bien gratuitement
         </RouterLink>
@@ -45,7 +72,9 @@
 </template>
 
 <script setup>
+import { SITE } from '../config/seo.js'
 const currentYear = new Date().getFullYear()
+const gbpUrl = SITE.gbpUrl
 </script>
 
 <style scoped>

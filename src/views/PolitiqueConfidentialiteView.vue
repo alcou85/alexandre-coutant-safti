@@ -2,7 +2,7 @@
   <main class="legal-page">
     <div class="container">
       <h1>Politique de confidentialité</h1>
-      <p class="last-update">Dernière mise à jour : <span class="placeholder">[À COMPLÉTER]</span></p>
+      <p class="last-update">Dernière mise à jour : 13 novembre 2026</p>
 
       <div class="legal-content">
 
@@ -14,8 +14,8 @@
           <ul class="legal-list">
             <li><strong>Nom :</strong> Alexandre Coutant</li>
             <li><strong>Qualité :</strong> Conseiller immobilier indépendant – Réseau SAFTI</li>
-            <li><strong>Email :</strong> <a href="mailto:contact@alexandrecoutant-safti.fr">contact@alexandrecoutant-safti.fr</a></li>
-            <li><strong>Adresse :</strong> <span class="placeholder">[À COMPLÉTER]</span></li>
+            <li><strong>Email :</strong> <a href="mailto:alexandre.coutant@safti.fr">alexandre.coutant@safti.fr</a></li>
+            <li><strong>Adresse :</strong> La Roche-sur-Yon (85000), Vendée</li>
           </ul>
         </section>
 
@@ -59,15 +59,14 @@
           </p>
           <p>
             Vous pouvez retirer votre consentement à tout moment en envoyant un email à
-            <a href="mailto:contact@alexandrecoutant-safti.fr">contact@alexandrecoutant-safti.fr</a>.
+            <a href="mailto:alexandre.coutant@safti.fr">alexandre.coutant@safti.fr</a>.
           </p>
         </section>
 
         <section class="legal-section">
           <h2>5. Durée de conservation</h2>
           <p>
-            Vos données sont conservées pendant une durée de
-            <span class="placeholder">[À COMPLÉTER — ex. 3 ans]</span>
+            Vos données sont conservées pendant une durée de <strong>3 ans</strong>
             à compter de leur collecte, ou jusqu'à ce que vous demandiez leur suppression.
           </p>
         </section>
@@ -116,7 +115,7 @@
           </ul>
           <p>
             Pour exercer ces droits, contactez-nous à :
-            <a href="mailto:contact@alexandrecoutant-safti.fr">contact@alexandrecoutant-safti.fr</a>
+            <a href="mailto:alexandre.coutant@safti.fr">alexandre.coutant@safti.fr</a>
           </p>
           <p>
             En cas de réclamation, vous pouvez également saisir la

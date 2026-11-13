@@ -27,7 +27,7 @@
       <div v-if="hors_zone && horsZoneMode === 'block'" class="alert alert--error" role="alert">
         <strong>Secteur hors zone</strong>
         <p>
-          Ce secteur est en dehors de ma zone d'intervention (La Roche-sur-Yon / Les Sables-d'Olonne et alentours).
+          Ce secteur est en dehors de ma zone d'intervention principale (La Roche-sur-Yon et Vendée).
           Pour toute demande hors secteur, contactez-moi directement.
         </p>
         <RouterLink to="/contact" class="btn-outline btn-sm" style="margin-top:0.75rem">
@@ -39,7 +39,7 @@
       <div v-if="hors_zone && horsZoneMode === 'capture'" class="alert alert--warning" role="alert">
         <strong>Secteur hors de ma zone principale</strong>
         <p>
-          Ce secteur est hors de ma zone principale (La Roche-sur-Yon / Les Sables-d'Olonne).
+          Ce secteur est hors de ma zone principale (La Roche-sur-Yon et alentours).
           Je pourrai vous proposer une estimation personnalisée.
         </p>
       </div>
@@ -61,6 +61,7 @@
 <script setup>
 import { ref } from 'vue'
 import AddressAutocomplete from '../AddressAutocomplete.vue'
+import { ESTIMATION_CONFIG } from '../../config/estimation.js'
 
 const props = defineProps({
   address: { type: String, required: true },
@@ -74,8 +75,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update', 'next'])
 
-// Postcodes in the intervention zone
-const ZONE_POSTCODES = ['85190', '85000', '85280', '85310', '85430', '85150', '85480', '85100']
+const ZONE_POSTCODES = ESTIMATION_CONFIG.WHITELIST_POSTAL_CODES
 
 const showSelectionError = ref(false)
 // Track if user selected from autocomplete (not just typed)

@@ -1,0 +1,561 @@
+{
+  "generated_at": "2026-09-13",
+  "by_commune": {
+    "85001": {
+      "Maison": {
+        "median": 3918,
+        "count": 10
+      },
+      "Appartement": {
+        "median": 3570,
+        "count": 7
+      }
+    },
+    "85003": {
+      "Appartement": {
+        "median": 2148,
+        "count": 2
+      },
+      "Maison": {
+        "median": 2082,
+        "count": 1
+      }
+    },
+    "85008": {
+      "Appartement": {
+        "median": 2182,
+        "count": 1
+      }
+    },
+    "85011": {
+      "Maison": {
+        "median": 3673,
+        "count": 2
+      },
+      "Appartement": {
+        "median": 3597,
+        "count": 2
+      }
+    },
+    "85012": {
+      "Appartement": {
+        "median": 3057,
+        "count": 15
+      },
+      "Maison": {
+        "median": 3571,
+        "count": 3
+      }
+    },
+    "85018": {
+      "Maison": {
+        "median": 1866,
+        "count": 4
+      },
+      "Appartement": {
+        "median": 3283,
+        "count": 1
+      }
+    },
+    "85019": {
+      "Maison": {
+        "median": 2189,
+        "count": 2
+      }
+    },
+    "85035": {
+      "Maison": {
+        "median": 5690,
+        "count": 31
+      },
+      "Appartement": {
+        "median": 4165,
+        "count": 34
+      }
+    },
+    "85039": {
+      "Maison": {
+        "median": 1525,
+        "count": 1
+      },
+      "Appartement": {
+        "median": 5793,
+        "count": 1
+      }
+    },
+    "85046": {
+      "Appartement": {
+        "median": 16667,
+        "count": 3
+      }
+    },
+    "85047": {
+      "Appartement": {
+        "median": 2803,
+        "count": 43
+      },
+      "Maison": {
+        "median": 2885,
+        "count": 6
+      }
+    },
+    "85051": {
+      "Appartement": {
+        "median": 1666,
+        "count": 7
+      }
+    },
+    "85054": {
+      "Maison": {
+        "median": 2353,
+        "count": 5
+      }
+    },
+    "85070": {
+      "Maison": {
+        "median": 2681,
+        "count": 2
+      },
+      "Appartement": {
+        "median": 2021,
+        "count": 2
+      }
+    },
+    "85071": {
+      "Appartement": {
+        "median": 3462,
+        "count": 1
+      }
+    },
+    "85076": {
+      "Maison": {
+        "median": 2071,
+        "count": 1
+      }
+    },
+    "85080": {
+      "Appartement": {
+        "median": 2100,
+        "count": 1
+      }
+    },
+    "85081": {
+      "Appartement": {
+        "median": 2121,
+        "count": 1
+      },
+      "Maison": {
+        "median": 1636,
+        "count": 1
+      }
+    },
+    "85083": {
+      "Maison": {
+        "median": 4231,
+        "count": 1
+      }
+    },
+    "85084": {
+      "Maison": {
+        "median": 1726,
+        "count": 1
+      }
+    },
+    "85086": {
+      "Appartement": {
+        "median": 1443,
+        "count": 1
+      }
+    },
+    "85088": {
+      "Appartement": {
+        "median": 3413,
+        "count": 4
+      },
+      "Maison": {
+        "median": 2443,
+        "count": 1
+      }
+    },
+    "85090": {
+      "Maison": {
+        "median": 32500,
+        "count": 1
+      }
+    },
+    "85092": {
+      "Appartement": {
+        "median": 1549,
+        "count": 23
+      },
+      "Maison": {
+        "median": 1481,
+        "count": 7
+      }
+    },
+    "85096": {
+      "Maison": {
+        "median": 1579,
+        "count": 4
+      }
+    },
+    "85100": {
+      "Appartement": {
+        "median": 4099,
+        "count": 3
+      }
+    },
+    "85103": {
+      "Maison": {
+        "median": 2924,
+        "count": 1
+      }
+    },
+    "85106": {
+      "Appartement": {
+        "median": 4903,
+        "count": 4
+      }
+    },
+    "85108": {
+      "Appartement": {
+        "median": 2462,
+        "count": 1
+      }
+    },
+    "85109": {
+      "Maison": {
+        "median": 1885,
+        "count": 2
+      },
+      "Appartement": {
+        "median": 2751,
+        "count": 12
+      }
+    },
+    "85113": {
+      "Appartement": {
+        "median": 5514,
+        "count": 5
+      },
+      "Maison": {
+        "median": 6093,
+        "count": 4
+      }
+    },
+    "85114": {
+      "Appartement": {
+        "median": 4043,
+        "count": 21
+      },
+      "Maison": {
+        "median": 4122,
+        "count": 15
+      }
+    },
+    "85127": {
+      "Maison": {
+        "median": 4118,
+        "count": 7
+      },
+      "Appartement": {
+        "median": 4146,
+        "count": 22
+      }
+    },
+    "85128": {
+      "Appartement": {
+        "median": 2270,
+        "count": 15
+      },
+      "Maison": {
+        "median": 1429,
+        "count": 3
+      }
+    },
+    "85129": {
+      "Maison": {
+        "median": 1943,
+        "count": 1
+      }
+    },
+    "85130": {
+      "Appartement": {
+        "median": 2276,
+        "count": 1
+      }
+    },
+    "85133": {
+      "Appartement": {
+        "median": 2315,
+        "count": 2
+      }
+    },
+    "85146": {
+      "Appartement": {
+        "median": 2778,
+        "count": 14
+      },
+      "Maison": {
+        "median": 2039,
+        "count": 3
+      }
+    },
+    "85151": {
+      "Maison": {
+        "median": 1681,
+        "count": 1
+      },
+      "Appartement": {
+        "median": 1954,
+        "count": 1
+      }
+    },
+    "85152": {
+      "Appartement": {
+        "median": 3043,
+        "count": 1
+      }
+    },
+    "85162": {
+      "Appartement": {
+        "median": 745,
+        "count": 1
+      }
+    },
+    "85163": {
+      "Maison": {
+        "median": 5225,
+        "count": 9
+      },
+      "Appartement": {
+        "median": 3636,
+        "count": 7
+      }
+    },
+    "85164": {
+      "Maison": {
+        "median": 3492,
+        "count": 11
+      },
+      "Appartement": {
+        "median": 3990,
+        "count": 22
+      }
+    },
+    "85172": {
+      "Appartement": {
+        "median": 2233,
+        "count": 1
+      }
+    },
+    "85178": {
+      "Maison": {
+        "median": 1341,
+        "count": 1
+      },
+      "Appartement": {
+        "median": 3400,
+        "count": 1
+      }
+    },
+    "85182": {
+      "Appartement": {
+        "median": 3761,
+        "count": 2
+      },
+      "Maison": {
+        "median": 988,
+        "count": 1
+      }
+    },
+    "85190": {
+      "Appartement": {
+        "median": 1885,
+        "count": 5
+      },
+      "Maison": {
+        "median": 2192,
+        "count": 1
+      }
+    },
+    "85191": {
+      "Maison": {
+        "median": 2619,
+        "count": 9
+      },
+      "Appartement": {
+        "median": 2552,
+        "count": 214
+      }
+    },
+    "85194": {
+      "Appartement": {
+        "median": 4655,
+        "count": 354
+      },
+      "Maison": {
+        "median": 4624,
+        "count": 38
+      }
+    },
+    "85206": {
+      "Maison": {
+        "median": 2203,
+        "count": 12
+      }
+    },
+    "85208": {
+      "Maison": {
+        "median": 1538,
+        "count": 1
+      }
+    },
+    "85215": {
+      "Maison": {
+        "median": 2056,
+        "count": 1
+      },
+      "Appartement": {
+        "median": 1731,
+        "count": 1
+      }
+    },
+    "85222": {
+      "Appartement": {
+        "median": 4621,
+        "count": 98
+      },
+      "Maison": {
+        "median": 28571,
+        "count": 15
+      }
+    },
+    "85226": {
+      "Maison": {
+        "median": 3556,
+        "count": 27
+      },
+      "Appartement": {
+        "median": 2866,
+        "count": 266
+      }
+    },
+    "85234": {
+      "Appartement": {
+        "median": 3535,
+        "count": 147
+      },
+      "Maison": {
+        "median": 3945,
+        "count": 38
+      }
+    },
+    "85238": {
+      "Appartement": {
+        "median": 2523,
+        "count": 1
+      }
+    },
+    "85243": {
+      "Maison": {
+        "median": 4594,
+        "count": 8
+      },
+      "Appartement": {
+        "median": 2816,
+        "count": 1
+      }
+    },
+    "85262": {
+      "Appartement": {
+        "median": 2591,
+        "count": 4
+      },
+      "Maison": {
+        "median": 2130,
+        "count": 2
+      }
+    },
+    "85278": {
+      "Maison": {
+        "median": 5993,
+        "count": 5
+      },
+      "Appartement": {
+        "median": 3490,
+        "count": 5
+      }
+    },
+    "85284": {
+      "Appartement": {
+        "median": 2241,
+        "count": 1
+      }
+    },
+    "85288": {
+      "Appartement": {
+        "median": 3652,
+        "count": 41
+      },
+      "Maison": {
+        "median": 3723,
+        "count": 11
+      }
+    },
+    "85289": {
+      "Appartement": {
+        "median": 1263,
+        "count": 1
+      }
+    },
+    "85290": {
+      "Appartement": {
+        "median": 11429,
+        "count": 1
+      }
+    },
+    "85294": {
+      "Appartement": {
+        "median": 3984,
+        "count": 20
+      },
+      "Maison": {
+        "median": 4374,
+        "count": 32
+      }
+    },
+    "85302": {
+      "Maison": {
+        "median": 147000,
+        "count": 1
+      }
+    },
+    "85304": {
+      "Maison": {
+        "median": 1753,
+        "count": 1
+      }
+    },
+    "85305": {
+      "Appartement": {
+        "median": 1810,
+        "count": 3
+      },
+      "Maison": {
+        "median": 3248,
+        "count": 1
+      }
+    }
+  },
+  "departement": {
+    "Maison": {
+      "median": 3841,
+      "count": 331
+    },
+    "Appartement": {
+      "median": 3375,
+      "count": 1408
+    }
+  }
+}

@@ -1,7 +1,7 @@
 /**
  * Configuration centralisée du simulateur d'estimation.
  * Ce fichier est la seule source de vérité pour les paramètres métier.
- * Utilisé côté API (serverless) uniquement — ne pas importer côté client.
+ * Utilisé côté API (serverless) et côté client (simulateur wizard).
  */
 
 export const ESTIMATION_CONFIG = {
@@ -9,12 +9,8 @@ export const ESTIMATION_CONFIG = {
   WHITELIST_POSTAL_CODES: [
     '85190', // La Roche-sur-Yon
     '85000', // La Roche-sur-Yon
-    '85280', // La Ferrière
     '85310', // La Chaize-le-Vicomte
     '85430', // Aubigny-Les Clouzeaux
-    '85150', // Les Sables-d'Olonne
-    '85480', // Brem-sur-Mer
-    '85100', // Les Sables-d'Olonne
   ],
 
   // Comportement hors zone : 'capture' (capturer le lead) | 'block' (bloquer)

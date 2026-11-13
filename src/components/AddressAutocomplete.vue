@@ -39,7 +39,10 @@
       </li>
     </ul>
 
-    <p v-if="noResults" class="autocomplete-no-results">Aucune adresse trouvée.</p>
+    <p v-if="fetchError" class="autocomplete-no-results autocomplete-error">
+      Service de recherche d'adresse indisponible. Réessayez dans quelques instants.
+    </p>
+    <p v-else-if="noResults" class="autocomplete-no-results">Aucune adresse trouvée.</p>
   </div>
 </template>
 
@@ -64,12 +67,14 @@ const inputRef = ref(null)
 const suggestions = ref([])
 const activeIndex = ref(-1)
 const noResults = ref(false)
+const fetchError = ref(false)
 let debounceTimer = null
 
 function onInput(event) {
   const query = event.target.value
   emit('update:modelValue', query)
   noResults.value = false
+  fetchError.value = false
 
   clearTimeout(debounceTimer)
 
@@ -94,7 +99,8 @@ async function fetchSuggestions(query) {
     noResults.value = suggestions.value.length === 0
   } catch {
     suggestions.value = []
-    noResults.value = false
+    noResults.value = true
+    fetchError.value = true
   }
 }
 
@@ -148,6 +154,7 @@ function onBlur() {
     suggestions.value = []
     activeIndex.value = -1
     noResults.value = false
+    fetchError.value = false
   }, 150)
 }
 
@@ -224,5 +231,10 @@ watch(() => props.modelValue, (val) => {
   font-size: 0.875rem;
   color: var(--color-muted);
   box-shadow: var(--shadow-sm);
+}
+
+.autocomplete-error {
+  color: var(--color-warning);
+  border-color: rgba(146, 64, 14, 0.25);
 }
 </style>

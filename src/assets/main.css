@@ -2,10 +2,10 @@
    CSS Custom Properties
    ============================================================ */
 :root {
-  --color-bg: #F4F1EC;
+  --color-bg: #F5F2EE;
   --color-primary: #1C2B3A;
-  --color-accent: #BA9B6A;
-  --color-accent-dark: #a0844f;
+  --color-accent: #E06B1F;
+  --color-accent-dark: #C45819;
   --color-white: #FFFFFF;
   --color-muted: #6B7280;
   --color-border: #E2DDD5;

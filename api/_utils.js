@@ -44,15 +44,25 @@ export function validateHoneypot(body) {
   return !body.honeypot // champ vide = humain
 }
 
-export function setCorsHeaders(res) {
-  res.setHeader('Access-Control-Allow-Origin', '*')
+const ALLOWED_ORIGINS = [
+  'https://www.coutant-immobilier-vendee.fr',
+  'https://coutant-immobilier-vendee.fr',
+  'http://localhost:5173',
+  'http://localhost:4173',
+]
+
+export function setCorsHeaders(res, req = null) {
+  const origin = req?.headers?.origin
+  const allow = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0]
+  res.setHeader('Access-Control-Allow-Origin', allow)
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  res.setHeader('Vary', 'Origin')
 }
 
 export function handleOptions(req, res) {
   if (req.method === 'OPTIONS') {
-    setCorsHeaders(res)
+    setCorsHeaders(res, req)
     res.status(204).end()
     return true
   }

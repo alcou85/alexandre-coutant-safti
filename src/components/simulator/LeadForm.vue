@@ -73,7 +73,7 @@
       :disabled="submitting"
     >
       <span v-if="submitting" class="btn-spinner" aria-hidden="true"></span>
-      {{ submitting ? 'Envoi en cours…' : 'Être recontacté(e) pour affiner mon estimation' }}
+      {{ submitting ? 'Envoi en cours…' : 'Être recontacté' }}
     </button>
   </form>
 </template>
@@ -180,8 +180,8 @@ async function handleSubmit() {
 
 .form-optional {
   font-size: 0.78rem;
-  color: var(--color-muted);
-  font-weight: 400;
+  color: var(--color-accent);
+  font-weight: 500;
 }
 
 .form-input--error {
@@ -234,10 +234,12 @@ async function handleSubmit() {
 
 /* Submit button */
 .submit-btn {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
+  width: 100%;
+  justify-content: center;
+  padding: 0.9rem 1.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+  margin-top: 0.25rem;
 }
 
 .btn-spinner {

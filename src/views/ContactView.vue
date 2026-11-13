@@ -2,7 +2,7 @@
   <main class="contact-page">
     <div class="container">
       <div class="page-header">
-        <h1>Contact</h1>
+        <h1>Me contacter – Conseiller immobilier à La Roche-sur-Yon</h1>
         <p class="page-intro">
           Vous avez une question, un projet de vente ou d'achat ? Je suis disponible
           pour en discuter sans engagement.
@@ -12,7 +12,11 @@
       <div class="contact-layout">
 
         <!-- Coordinates column -->
-        <aside class="coords-col">
+        <aside
+          class="coords-col"
+          itemscope
+          itemtype="https://schema.org/RealEstateAgent"
+        >
           <h2 class="coords-title">Coordonnées</h2>
 
           <ul class="coords-list">
@@ -20,7 +24,11 @@
               <span class="coords-icon" aria-hidden="true">📞</span>
               <div>
                 <p class="coords-label">Téléphone</p>
-                <a href="tel:+33XXXXXXXXX" class="coords-value">+33 X XX XX XX XX</a>
+                <a
+                  href="tel:+33665087707"
+                  class="coords-value"
+                  itemprop="telephone"
+                >06 65 08 77 07</a>
               </div>
             </li>
 
@@ -28,19 +36,31 @@
               <span class="coords-icon" aria-hidden="true">✉</span>
               <div>
                 <p class="coords-label">Email</p>
-                <a href="mailto:contact@alexandrecoutant-safti.fr" class="coords-value">
-                  contact@alexandrecoutant-safti.fr
+                <a
+                  href="mailto:alexandre.coutant@safti.fr"
+                  class="coords-value"
+                  itemprop="email"
+                >
+                  alexandre.coutant@safti.fr
                 </a>
               </div>
             </li>
 
             <li class="coords-item">
               <span class="coords-icon" aria-hidden="true">📍</span>
-              <div>
+              <div
+                itemprop="address"
+                itemscope
+                itemtype="https://schema.org/PostalAddress"
+              >
                 <p class="coords-label">Zone d'intervention</p>
                 <p class="coords-value">
-                  Basé à La Roche-sur-Yon, disponible sur La Roche-sur-Yon,
-                  Les Sables-d'Olonne et leurs alentours.
+                  Basé à
+                  <span itemprop="addressLocality">La Roche-sur-Yon</span>
+                  (<span itemprop="postalCode">85000</span>),
+                  disponible sur La Roche-sur-Yon et en Vendée.
+                  <meta itemprop="addressRegion" content="Vendée" />
+                  <meta itemprop="addressCountry" content="FR" />
                 </p>
               </div>
             </li>
@@ -54,6 +74,7 @@
                   class="coords-value"
                   target="_blank"
                   rel="noopener noreferrer"
+                  itemprop="url"
                 >
                   Voir mes biens à vendre
                 </a>
@@ -63,8 +84,9 @@
 
           <div class="coords-note">
             <p>
+              <span itemprop="name">Alexandre Coutant</span> —
               Réseau SAFTI — Conseiller immobilier indépendant<br />
-              N° RSAC : <span class="placeholder">[À COMPLÉTER]</span>
+              N° RSAC : 105 775 613 RSAC La Roche-sur-Yon
             </p>
           </div>
         </aside>
@@ -178,6 +200,15 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
+import { useSeo } from '../composables/useSeo.js'
+import { SITE } from '../config/seo.js'
+
+useSeo({
+  title: 'Contact – Alexandre Coutant Conseiller SAFTI Vendée',
+  description:
+    "Contactez Alexandre Coutant, conseiller immobilier indépendant SAFTI à La Roche-sur-Yon (Vendée). Disponible pour tout projet de vente, d'achat ou d'estimation en Vendée.",
+  canonical: `${SITE.url}/contact`,
+})
 
 const listingsUrl = import.meta.env.VITE_SAFTI_LISTINGS_URL || '/'
 

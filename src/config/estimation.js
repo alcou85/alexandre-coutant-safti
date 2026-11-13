@@ -5,13 +5,8 @@
  */
 
 export const ESTIMATION_CONFIG = {
-  // Codes postaux couverts (whitelist)
-  WHITELIST_POSTAL_CODES: [
-    '85190', // La Roche-sur-Yon
-    '85000', // La Roche-sur-Yon
-    '85310', // La Chaize-le-Vicomte
-    '85430', // Aubigny-Les Clouzeaux
-  ],
+  // Département couvert : toute la Vendée (code INSEE commençant par '85')
+  COVERED_DEPT: '85',
 
   // Comportement hors zone : 'capture' (capturer le lead) | 'block' (bloquer)
   HORS_ZONE_MODE: 'capture',

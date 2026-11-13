@@ -114,6 +114,7 @@ const state = reactive({
   error: null,
   result: null,
   leadSent: false,
+  notificationSent: false,
 })
 
 const progressWidth = computed(() => {
@@ -164,11 +165,20 @@ function onStep2Update(payload) {
   state.ascenseur = payload.ascenseur
 }
 
+function sendEstimationNotify(result, formData) {
+  fetch('/api/estimation-notify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ...formData, ...result }),
+  }).catch(() => {})
+}
+
 async function submitEstimate() {
   state.step = 3
   state.loading = true
   state.error = null
   state.result = null
+  state.notificationSent = false
 
   // Hors zone en mode capture : pas d'estimation, juste le formulaire de contact
   if (state.hors_zone && HORS_ZONE_MODE === 'capture') {
@@ -186,6 +196,12 @@ async function submitEstimate() {
       terrain:      state.terrain !== '' && state.terrain !== null ? Number(state.terrain) : null,
       code_commune: state.code_commune,
     })
+
+    // Notification automatique après chaque estimation réussie (fire & forget)
+    if (!state.notificationSent) {
+      state.notificationSent = true
+      sendEstimationNotify(state.result, fullFormData.value)
+    }
   } catch (err) {
     state.error = err.message || 'Une erreur inattendue est survenue. Veuillez réessayer.'
   } finally {

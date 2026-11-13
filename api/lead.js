@@ -53,11 +53,12 @@ function buildEmailHtml(lead) {
 
   <div style="background:#1C2B3A;padding:20px 24px;border-radius:6px 6px 0 0">
     <p style="margin:0;font-size:11px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.1em">Alexandre Coutant · SAFTI</p>
-    <h1 style="margin:4px 0 0;font-size:18px;color:#fff;font-weight:600">Nouveau lead – ${sourceLabel}</h1>
+    <h1 style="margin:4px 0 0;font-size:18px;color:#fff;font-weight:600">Demande de contact – ${sourceLabel}</h1>
   </div>
 
   <table style="border-collapse:collapse;width:100%;border:1px solid #e5e1db;border-top:none;border-radius:0 0 6px 6px">
     ${section('Contact')}
+    ${row('Nom', lead.nom)}
     ${row('Téléphone', lead.telephone ? `<a href="tel:${lead.telephone}" style="color:#E06B1F">${lead.telephone}</a>` : null)}
     ${row('Email', lead.email ? `<a href="mailto:${lead.email}" style="color:#E06B1F">${lead.email}</a>` : null)}
     ${row('Reçu le', dateLabel)}
@@ -173,7 +174,7 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         from:    'notifications@coutant-immobilier-vendee.fr',
         to:      [process.env.EMAIL_TO],
-        subject: `[Lead] Nouveau contact – ${source === 'hors_zone' ? 'Hors zone' : 'Estimation'}`,
+        subject: `[Contact] ${leadRow.nom ?? 'Nouveau prospect'} – ${source === 'hors_zone' ? 'Hors zone' : 'Demande de rappel'}`,
         html:    buildEmailHtml({ ...leadRow }),
       }),
     })

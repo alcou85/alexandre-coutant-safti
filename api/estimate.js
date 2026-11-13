@@ -132,8 +132,8 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'État du bien invalide' })
   }
 
-  // Vérification zone
-  const hors_zone = !C.WHITELIST_POSTAL_CODES.includes(String(code_postal))
+  // Vérification zone : Vendée uniquement (code INSEE commence par '85')
+  const hors_zone = !String(code_commune).startsWith(C.COVERED_DEPT)
   if (hors_zone) {
     return res.status(200).json({ success: true, hors_zone: true })
   }

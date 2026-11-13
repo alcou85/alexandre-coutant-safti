@@ -25,9 +25,9 @@
 
       <!-- Hors zone — block mode -->
       <div v-if="hors_zone && horsZoneMode === 'block'" class="alert alert--error" role="alert">
-        <strong>Secteur hors zone</strong>
+        <strong>Secteur hors Vendée</strong>
         <p>
-          Ce secteur est en dehors de ma zone d'intervention principale (La Roche-sur-Yon et Vendée).
+          Ce secteur est en dehors de mon secteur d'intervention (département de la Vendée – 85).
           Pour toute demande hors secteur, contactez-moi directement.
         </p>
         <RouterLink to="/contact" class="btn-outline btn-sm" style="margin-top:0.75rem">
@@ -37,10 +37,10 @@
 
       <!-- Hors zone — capture mode -->
       <div v-if="hors_zone && horsZoneMode === 'capture'" class="alert alert--warning" role="alert">
-        <strong>Secteur hors de ma zone principale</strong>
+        <strong>Secteur hors Vendée</strong>
         <p>
-          Ce secteur est hors de ma zone principale (La Roche-sur-Yon et alentours).
-          Je pourrai vous proposer une estimation personnalisée.
+          Ce secteur est en dehors de mon secteur d'intervention (département 85).
+          Laissez-moi vos coordonnées, je pourrai vous proposer une estimation personnalisée.
         </p>
       </div>
     </div>
@@ -75,7 +75,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update', 'next'])
 
-const ZONE_POSTCODES = ESTIMATION_CONFIG.WHITELIST_POSTAL_CODES
+const COVERED_DEPT = ESTIMATION_CONFIG.COVERED_DEPT
 
 const showSelectionError = ref(false)
 // Track if user selected from autocomplete (not just typed)
@@ -96,7 +96,7 @@ function onAddressInput(value) {
 }
 
 function onAddressSelect(payload) {
-  const hors_zone = !ZONE_POSTCODES.includes(payload.postcode)
+  const hors_zone = !payload.citycode?.startsWith(COVERED_DEPT)
   isSelected.value = true
   showSelectionError.value = false
   emit('update', {

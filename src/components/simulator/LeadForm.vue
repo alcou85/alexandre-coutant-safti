@@ -11,6 +11,20 @@
     />
 
     <div class="form-field">
+      <label class="form-label" for="lead-nom">
+        Nom et prénom <span class="form-optional">optionnel</span>
+      </label>
+      <input
+        id="lead-nom"
+        v-model="nom"
+        type="text"
+        class="form-input"
+        placeholder="Ex : Marie Dupont"
+        autocomplete="name"
+      />
+    </div>
+
+    <div class="form-field">
       <label class="form-label" for="lead-phone">
         Téléphone <span class="required" aria-hidden="true">*</span>
       </label>
@@ -70,11 +84,12 @@
     <button
       type="submit"
       class="btn-primary submit-btn"
-      :disabled="submitting"
+      :disabled="submitting || !consent"
     >
       <span v-if="submitting" class="btn-spinner" aria-hidden="true"></span>
       {{ submitting ? 'Envoi en cours…' : 'Être recontacté' }}
     </button>
+    <p v-if="!consent" class="consent-hint">Cochez la case ci-dessus pour envoyer votre demande.</p>
   </form>
 </template>
 
@@ -87,6 +102,7 @@ const props = defineProps({
 
 const emit = defineEmits(['leadSent'])
 
+const nom = ref('')
 const phone = ref('')
 const email = ref('')
 const consent = ref(false)
@@ -140,11 +156,12 @@ async function handleSubmit() {
   try {
     const body = {
       ...props.formData,
-      source: props.formData.hors_zone ? 'hors_zone' : 'estimation',
-      telephone: phone.value,
-      email: email.value || null,
+      source:       props.formData.hors_zone ? 'hors_zone' : 'estimation',
+      nom:          nom.value?.trim() || null,
+      telephone:    phone.value,
+      email:        email.value || null,
       consentement: true,
-      honeypot: '',
+      honeypot:     '',
     }
 
     const response = await fetch('/api/lead', {
@@ -222,6 +239,14 @@ async function handleSubmit() {
   font-size: inherit;
 }
 
+.consent-hint {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  text-align: center;
+  margin-top: -0.5rem;
+  margin-bottom: 0;
+}
+
 /* Alert */
 .alert-error {
   background-color: var(--color-error-bg);
@@ -240,6 +265,11 @@ async function handleSubmit() {
   font-size: 1rem;
   letter-spacing: 0.01em;
   margin-top: 0.25rem;
+}
+
+.submit-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .btn-spinner {

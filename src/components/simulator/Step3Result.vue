@@ -13,19 +13,17 @@
       <button type="button" class="btn-outline" @click="emit('back')">Retour</button>
     </div>
 
-    <!-- Succès : lead envoyé -->
-    <div v-else-if="leadSent" class="state-success" role="alert">
-      <div class="success-check" aria-hidden="true">✓</div>
-      <p class="success-title">Merci !</p>
-      <p class="success-body">Je vous recontacterai sous 24 h pour affiner cette estimation.</p>
-    </div>
-
-    <!-- Hors zone -->
+    <!-- Hors zone : pas d'estimation, formulaire de contact direct -->
     <template v-else-if="hors_zone">
       <p class="out-of-zone-msg">
-        Votre bien est hors de ma zone principale. Laissez-moi vos coordonnées, je vous proposerai une estimation personnalisée.
+        Votre bien est situé hors de mon secteur d'intervention (Vendée – 85). Laissez-moi vos coordonnées, je vous proposerai une estimation personnalisée.
       </p>
-      <LeadForm :formData="formData" @leadSent="emit('leadSent')" />
+      <div v-if="leadSent" class="lead-success" role="alert">
+        <div class="success-check" aria-hidden="true">✓</div>
+        <p class="success-title">Merci !</p>
+        <p class="success-body">Je vous recontacterai sous 24 h pour affiner cette estimation.</p>
+      </div>
+      <LeadForm v-else :formData="formData" @leadSent="emit('leadSent')" />
       <div class="back-row">
         <button type="button" class="btn-back" @click="emit('back')">Modifier mes informations</button>
       </div>
@@ -60,10 +58,33 @@
       <!-- Séparateur -->
       <hr class="divider" />
 
-      <!-- Contact -->
-      <div class="contact-section">
-        <p class="contact-lead">Laissez-moi vos coordonnées pour affiner l'estimation.</p>
-        <LeadForm :formData="formDataWithResult" @leadSent="emit('leadSent')" />
+      <!-- Section CTA contact -->
+      <div class="cta-section">
+
+        <!-- Succès après envoi du formulaire -->
+        <div v-if="leadSent" class="lead-success" role="alert">
+          <div class="lead-success-icon" aria-hidden="true">✓</div>
+          <div>
+            <p class="lead-success-title">Merci !</p>
+            <p class="lead-success-body">Je vous recontacterai sous 24 h pour affiner cette estimation.</p>
+          </div>
+        </div>
+
+        <!-- Formulaire affiché après clic -->
+        <template v-else-if="showContactForm">
+          <p class="cta-form-intro">Renseignez vos coordonnées et je vous rappelle rapidement.</p>
+          <LeadForm :formData="formDataWithResult" @leadSent="emit('leadSent')" />
+        </template>
+
+        <!-- CTA initial -->
+        <template v-else>
+          <p class="cta-lead">Vous souhaitez affiner cette estimation ou connaître la valeur réelle de votre bien sur le marché ?</p>
+          <p class="cta-sub">Notre équipe peut vous accompagner et vous proposer une estimation personnalisée gratuite.</p>
+          <button type="button" class="btn-cta" @click="showContactForm = true">
+            Être recontacté gratuitement
+          </button>
+        </template>
+
       </div>
 
       <!-- Action secondaire -->
@@ -83,7 +104,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import LeadForm from './LeadForm.vue'
 
 const props = defineProps({
@@ -96,6 +117,8 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['back', 'leadSent'])
+
+const showContactForm = ref(false)
 
 const formDataWithResult = computed(() => ({
   ...props.formData,
@@ -159,42 +182,6 @@ function formatPriceM2(value) {
 
 .error-msg {
   color: var(--color-error);
-  font-size: 0.9rem;
-  margin-bottom: 0;
-}
-
-/* ── Success ─────────────────────────────── */
-.state-success {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 2.5rem 1rem;
-  text-align: center;
-}
-
-.success-check {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background-color: var(--color-success-bg);
-  color: var(--color-success);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
-
-.success-title {
-  font-family: var(--font-heading);
-  font-size: 1.6rem;
-  margin-bottom: 0;
-}
-
-.success-body {
-  color: var(--color-muted);
   font-size: 0.9rem;
   margin-bottom: 0;
 }
@@ -287,18 +274,117 @@ function formatPriceM2(value) {
   margin: 0 0 1.5rem;
 }
 
-/* ── Contact ─────────────────────────────── */
-.contact-section {
+/* ── CTA section ─────────────────────────── */
+.cta-section {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding-bottom: 1.5rem;
 }
 
-.contact-lead {
+.cta-lead {
   font-size: 0.95rem;
   color: var(--color-primary);
   font-weight: 500;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.cta-sub {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.btn-cta {
+  align-self: flex-start;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition), opacity var(--transition);
+}
+
+.btn-cta:hover {
+  opacity: 0.88;
+}
+
+.cta-form-intro {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-bottom: 0;
+}
+
+/* ── Lead success inline ─────────────────── */
+.lead-success {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  background-color: var(--color-success-bg);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+}
+
+.lead-success-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-success);
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.lead-success-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 0.1rem;
+}
+
+.lead-success-body {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  margin-bottom: 0;
+}
+
+/* ── Success hors zone (plein écran) ─────── */
+.success-check {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 auto 0.25rem;
+}
+
+.success-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.success-body {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  text-align: center;
   margin-bottom: 0;
 }
 

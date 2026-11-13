@@ -1,4 +1,3 @@
-import { Resend } from 'resend'
 import { getSupabaseAdmin, hashIp, getClientIp, checkRateLimit, validateHoneypot, setCorsHeaders, handleOptions } from './_utils.js'
 import { ESTIMATION_CONFIG as C } from '../src/config/estimation.js'
 
@@ -163,18 +162,28 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'Erreur lors de l\'enregistrement.' })
   }
 
-  // Email de notification
+  // Email de notification via API REST Resend (pas de SDK pour éviter react-dom)
   try {
-    const resend = new Resend(process.env.RESEND_API_KEY)
-    await resend.emails.send({
-      from:    'notifications@coutant-immobilier-vendee.fr',
-      to:      process.env.EMAIL_TO,
-      subject: `[Lead] Nouveau contact – ${source === 'hors_zone' ? 'Hors zone' : 'Estimation'}`,
-      html:    buildEmailHtml({ ...leadRow }),
+    const emailRes = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from:    'notifications@coutant-immobilier-vendee.fr',
+        to:      [process.env.EMAIL_TO],
+        subject: `[Lead] Nouveau contact – ${source === 'hors_zone' ? 'Hors zone' : 'Estimation'}`,
+        html:    buildEmailHtml({ ...leadRow }),
+      }),
     })
+    if (!emailRes.ok) {
+      const errBody = await emailRes.text()
+      console.error('Resend API error:', emailRes.status, errBody)
+    }
   } catch (emailErr) {
     // L'email ne doit pas bloquer la confirmation au visiteur
-    console.error('Resend error:', emailErr)
+    console.error('Resend fetch error:', emailErr)
   }
 
   return res.status(200).json({ success: true })

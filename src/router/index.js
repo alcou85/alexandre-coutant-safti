@@ -22,6 +22,16 @@ const routes = [
     component: () => import('../views/LocalLaRocheView.vue'),
   },
   {
+    path: '/immobilier-les-sables-dolonne',
+    name: 'local-les-sables',
+    component: () => import('../views/LocalLesSablesView.vue'),
+  },
+  {
+    path: '/immobilier-la-ferriere',
+    name: 'local-la-ferriere',
+    component: () => import('../views/LocalLaFerriereView.vue'),
+  },
+  {
     path: '/actualites',
     name: 'blog',
     component: () => import('../views/BlogView.vue'),

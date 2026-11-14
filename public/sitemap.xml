@@ -15,11 +15,21 @@
     <priority>0.9</priority>
   </url>
 
-  <!-- Page locale La Roche-sur-Yon -->
+  <!-- Pages locales -->
   <url>
     <loc>https://www.coutant-immobilier-vendee.fr/immobilier-la-roche-sur-yon</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.coutant-immobilier-vendee.fr/immobilier-les-sables-dolonne</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.coutant-immobilier-vendee.fr/immobilier-la-ferriere</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <!-- Qui suis-je -->

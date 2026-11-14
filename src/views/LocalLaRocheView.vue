@@ -174,7 +174,7 @@ import { useSeo } from '../composables/useSeo.js'
 import { SITE } from '../config/seo.js'
 
 useSeo({
-  title: 'Immobilier à La Roche-sur-Yon – Estimation et vente',
+  title: 'Estimation immobilière La Roche-sur-Yon',
   description:
     'Marché immobilier à La Roche-sur-Yon (85000) : prix au m², tendances 2025 et accompagnement vente. Alexandre Coutant, conseiller SAFTI, vous accompagne pour estimer et vendre votre bien en Vendée.',
   canonical: `${SITE.url}/immobilier-la-roche-sur-yon`,

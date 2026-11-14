@@ -171,7 +171,7 @@ import { useSeo } from '../composables/useSeo.js'
 import { SITE } from '../config/seo.js'
 
 useSeo({
-  title: 'Immobilier à La Ferrière (85280) – Estimation et vente',
+  title: 'Estimation immobilière La Ferrière – Vendée',
   description:
     'Marché immobilier à La Ferrière (85280), Vendée : prix au m², tendances et accompagnement vente. Alexandre Coutant, conseiller SAFTI à 15 km de La Roche-sur-Yon, vous accompagne pour estimer et vendre votre maison.',
   canonical: `${SITE.url}/immobilier-la-ferriere`,

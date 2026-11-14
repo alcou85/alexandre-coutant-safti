@@ -107,7 +107,7 @@ const photoError = ref(false)
 const photoSrc = '/images/alexandre-coutant.jpeg'
 
 useSeo({
-  title: 'Alexandre Coutant – Conseiller Immobilier SAFTI La Roche-sur-Yon',
+  title: 'Conseiller immobilier SAFTI – La Roche-sur-Yon, Vendée',
   description:
     "Découvrez le profil d'Alexandre Coutant, conseiller immobilier indépendant SAFTI basé à La Roche-sur-Yon (Vendée). Vente, achat, estimation : un accompagnement personnalisé à La Roche-sur-Yon et en Vendée.",
   canonical: `${SITE.url}/qui-suis-je`,

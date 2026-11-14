@@ -161,7 +161,7 @@ import { useSeo } from '../composables/useSeo.js'
 import { SITE } from '../config/seo.js'
 
 useSeo({
-  title: 'Estimation immobilière gratuite à La Roche-sur-Yon – Vendée',
+  title: 'Estimation immobilière gratuite en Vendée',
   description:
     "Estimez gratuitement votre bien immobilier en Vendée. Alexandre Coutant, conseiller SAFTI à La Roche-sur-Yon, vous fournit une fourchette de prix basée sur les ventes réelles de votre secteur.",
   canonical: SITE.url,
@@ -172,11 +172,6 @@ useSeo({
       name: SITE.name,
       url: SITE.url,
       description: SITE.defaultDescription,
-      potentialAction: {
-        '@type': 'SearchAction',
-        target: `${SITE.url}/estimation`,
-        'query-input': 'required name=search_term_string',
-      },
     },
     {
       '@context': 'https://schema.org',

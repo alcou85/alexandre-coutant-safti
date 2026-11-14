@@ -65,7 +65,7 @@
         <p>
           &copy; {{ currentYear }} Alexandre Coutant – Conseiller SAFTI. Tous droits réservés.
         </p>
-        <p>Site réalisé avec Vue 3</p>
+        <p>Conseiller immobilier indépendant – Vendée (85)</p>
       </div>
     </div>
   </footer>

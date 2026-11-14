@@ -45,7 +45,7 @@ import { useSeo } from '../composables/useSeo.js'
 import { SITE } from '../config/seo.js'
 
 useSeo({
-  title: 'Actualités immobilières – La Roche-sur-Yon et Vendée',
+  title: 'Actualités immobilières – Vendée',
   description:
     'Conseils immobiliers, tendances du marché à La Roche-sur-Yon et en Vendée. Articles rédigés par Alexandre Coutant, conseiller immobilier indépendant SAFTI.',
   canonical: `${SITE.url}/actualites`,

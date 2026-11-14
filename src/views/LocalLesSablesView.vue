@@ -172,7 +172,7 @@ import { useSeo } from '../composables/useSeo.js'
 import { SITE } from '../config/seo.js'
 
 useSeo({
-  title: 'Immobilier aux Sables-d\'Olonne (85100) – Estimation et vente',
+  title: 'Estimation immobilière Les Sables-d\'Olonne',
   description:
     'Marché immobilier aux Sables-d\'Olonne (85100), Vendée : prix au m², tendances et accompagnement vente. Alexandre Coutant, conseiller SAFTI, vous aide à estimer et vendre votre bien sur le littoral vendéen.',
   canonical: `${SITE.url}/immobilier-les-sables-dolonne`,

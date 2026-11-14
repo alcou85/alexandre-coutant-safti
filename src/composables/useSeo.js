@@ -21,7 +21,7 @@ export function useSeo({
   jsonLd = [],
 } = {}) {
   const fullTitle = title
-    ? `${title} | Alexandre Coutant SAFTI`
+    ? `${title} | Alexandre Coutant`
     : SITE.name
 
   const metaDescription = description || SITE.defaultDescription

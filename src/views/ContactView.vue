@@ -204,7 +204,7 @@ import { useSeo } from '../composables/useSeo.js'
 import { SITE } from '../config/seo.js'
 
 useSeo({
-  title: 'Contact – Alexandre Coutant Conseiller SAFTI Vendée',
+  title: 'Contact – conseiller immobilier Vendée',
   description:
     "Contactez Alexandre Coutant, conseiller immobilier indépendant SAFTI à La Roche-sur-Yon (Vendée). Disponible pour tout projet de vente, d'achat ou d'estimation en Vendée.",
   canonical: `${SITE.url}/contact`,

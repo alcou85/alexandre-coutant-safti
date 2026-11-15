@@ -83,6 +83,9 @@
           <RouterLink to="/estimation" class="btn-primary">
             Lancer mon estimation
           </RouterLink>
+          <RouterLink to="/immobilier-vendee" class="btn-outline">
+            Marché immobilier Vendée
+          </RouterLink>
         </div>
       </div>
     </section>
@@ -361,7 +364,9 @@ function formatDate(dateStr) {
 
 .how-cta {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 0.75rem;
 }
 
 /* ── Actualités ────────────────────────────────────── */

@@ -43,10 +43,12 @@
 
       <!-- Right: Nav links -->
       <nav class="footer-col footer-nav" aria-label="Navigation secondaire">
-        <RouterLink to="/actualites" class="footer-link">Actualités immobilières</RouterLink>
+        <RouterLink to="/immobilier-vendee" class="footer-link">Immobilier en Vendée</RouterLink>
+        <RouterLink to="/vendre" class="footer-link">Vendre en Vendée</RouterLink>
         <RouterLink to="/immobilier-la-roche-sur-yon" class="footer-link">
           Immobilier La Roche-sur-Yon
         </RouterLink>
+        <RouterLink to="/actualites" class="footer-link">Actualités immobilières</RouterLink>
         <RouterLink to="/qui-suis-je" class="footer-link">Qui suis-je ?</RouterLink>
         <RouterLink to="/contact" class="footer-link">Contact</RouterLink>
         <RouterLink to="/mentions-legales" class="footer-link">Mentions légales</RouterLink>

@@ -17,9 +17,24 @@ const routes = [
     component: () => import('../views/AboutView.vue'),
   },
   {
+    path: '/immobilier-vendee',
+    name: 'vendee-hub',
+    component: () => import('../views/VendeeHubView.vue'),
+  },
+  {
+    path: '/vendre',
+    name: 'vendre',
+    component: () => import('../views/VendreView.vue'),
+  },
+  {
     path: '/immobilier-la-roche-sur-yon',
     name: 'local-la-roche',
     component: () => import('../views/LocalLaRocheView.vue'),
+  },
+  {
+    path: '/prix-immobilier-la-roche-sur-yon',
+    name: 'prix-la-roche',
+    component: () => import('../views/PrixLaRocheView.vue'),
   },
   {
     path: '/immobilier-les-sables-dolonne',
@@ -30,6 +45,41 @@ const routes = [
     path: '/immobilier-la-ferriere',
     name: 'local-la-ferriere',
     component: () => import('../views/LocalLaFerriereView.vue'),
+  },
+  {
+    path: '/immobilier-aubigny-les-clouzeaux',
+    name: 'local-aubigny',
+    component: () => import('../views/LocalAubignyView.vue'),
+  },
+  {
+    path: '/immobilier-mouilleron-le-captif',
+    name: 'local-mouilleron',
+    component: () => import('../views/LocalMouilleronView.vue'),
+  },
+  {
+    path: '/immobilier-aizenay',
+    name: 'local-aizenay',
+    component: () => import('../views/LocalAizenayView.vue'),
+  },
+  {
+    path: '/immobilier-venansault',
+    name: 'local-venansault',
+    component: () => import('../views/LocalVenansaultView.vue'),
+  },
+  {
+    path: '/immobilier-landeronde',
+    name: 'local-landeronde',
+    component: () => import('../views/LocalLanderondeView.vue'),
+  },
+  {
+    path: '/immobilier-ile-dolonne',
+    name: 'local-ile-dolonne',
+    component: () => import('../views/LocalIleDOlonneView.vue'),
+  },
+  {
+    path: '/immobilier-montaigu-vendee',
+    name: 'local-montaigu',
+    component: () => import('../views/LocalMontaiguView.vue'),
   },
   {
     path: '/actualites',

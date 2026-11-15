@@ -12,6 +12,9 @@
         <RouterLink to="/" class="nav-link" :class="{ active: route.name === 'home' }">
           Accueil
         </RouterLink>
+        <RouterLink to="/vendre" class="nav-link" :class="{ active: route.name === 'vendre' }">
+          Vendre
+        </RouterLink>
         <RouterLink to="/immobilier-la-roche-sur-yon" class="nav-link" :class="{ active: route.name === 'local-la-roche' }">
           La Roche-sur-Yon
         </RouterLink>
@@ -60,6 +63,7 @@
         <RouterLink to="/estimation" class="nav-mobile-link nav-mobile-cta" @click="closeMenu">
           Estimez votre bien
         </RouterLink>
+        <RouterLink to="/vendre" class="nav-mobile-link" @click="closeMenu">Vendre</RouterLink>
         <RouterLink to="/immobilier-la-roche-sur-yon" class="nav-mobile-link" @click="closeMenu">La Roche-sur-Yon</RouterLink>
         <RouterLink to="/qui-suis-je" class="nav-mobile-link" @click="closeMenu">Qui suis-je</RouterLink>
         <a

@@ -15,6 +15,18 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Pages thématiques -->
+  <url>
+    <loc>https://www.coutant-immobilier-vendee.fr/immobilier-vendee</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.coutant-immobilier-vendee.fr/vendre</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Pages locales -->
   <url>
     <loc>https://www.coutant-immobilier-vendee.fr/immobilier-la-roche-sur-yon</loc>
@@ -22,9 +34,49 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.coutant-immobilier-vendee.fr/prix-immobilier-la-roche-sur-yon</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.coutant-immobilier-vendee.fr/immobilier-les-sables-dolonne</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.coutant-immobilier-vendee.fr/immobilier-ile-dolonne</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coutant-immobilier-vendee.fr/immobilier-aizenay</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coutant-immobilier-vendee.fr/immobilier-mouilleron-le-captif</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coutant-immobilier-vendee.fr/immobilier-aubigny-les-clouzeaux</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coutant-immobilier-vendee.fr/immobilier-venansault</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coutant-immobilier-vendee.fr/immobilier-landeronde</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.coutant-immobilier-vendee.fr/immobilier-montaigu-vendee</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.coutant-immobilier-vendee.fr/immobilier-la-ferriere</loc>

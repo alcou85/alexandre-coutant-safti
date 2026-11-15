@@ -2,7 +2,6 @@
   <main class="contact-page">
     <div class="container">
       <div class="page-header">
-        <h1>Me contacter – Conseiller immobilier à La Roche-sur-Yon</h1>
         <p class="page-intro">
           Vous avez une question, un projet de vente ou d'achat ? Je suis disponible
           pour en discuter sans engagement.

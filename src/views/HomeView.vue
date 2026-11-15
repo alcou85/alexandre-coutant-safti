@@ -7,7 +7,7 @@
 
         <div class="hero-content">
           <p class="hero-eyebrow">Conseiller immobilier · La Roche-sur-Yon</p>
-          <h1 class="hero-heading">Estimez votre bien immobilier à La Roche-sur-Yon</h1>
+          <h1 class="hero-heading">Estimez votre bien immobilier en Vendée</h1>
           <p class="hero-sub">
             Une fourchette de prix basée sur les ventes réelles de votre secteur.
             Gratuit, en 2 minutes, sans engagement.

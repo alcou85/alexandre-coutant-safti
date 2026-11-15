@@ -113,6 +113,7 @@ function selectItem(item) {
     label: props_data.label,
     postcode: props_data.postcode,
     citycode: props_data.citycode,
+    city: props_data.city,
     lat,
     lon,
   })

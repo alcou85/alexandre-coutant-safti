@@ -11,6 +11,26 @@
     />
 
     <div class="form-field">
+      <label class="form-label" for="lead-projet">
+        Votre projet <span class="required" aria-hidden="true">*</span>
+      </label>
+      <select
+        id="lead-projet"
+        v-model="projet"
+        class="form-input form-select"
+        :class="{ 'form-input--error': errors.projet }"
+      >
+        <option value="" disabled>Choisissez votre situation…</option>
+        <option value="vendre">Je souhaite vendre</option>
+        <option value="curieux">Simple curiosité / estimation indicative</option>
+        <option value="succession">Dans le cadre d'une succession</option>
+        <option value="divorce">Dans le cadre d'une séparation</option>
+        <option value="autre">Autre</option>
+      </select>
+      <p v-if="errors.projet" class="form-error">{{ errors.projet }}</p>
+    </div>
+
+    <div class="form-field">
       <label class="form-label" for="lead-nom">
         Nom et prénom <span class="form-optional">optionnel</span>
       </label>
@@ -102,6 +122,7 @@ const props = defineProps({
 
 const emit = defineEmits(['leadSent'])
 
+const projet = ref('')
 const nom = ref('')
 const phone = ref('')
 const email = ref('')
@@ -111,6 +132,7 @@ const submitting = ref(false)
 const apiError = ref('')
 
 const errors = reactive({
+  projet: '',
   phone: '',
   email: '',
   consent: '',
@@ -119,10 +141,16 @@ const errors = reactive({
 const PHONE_RE = /^(\+33|0033|0)[1-9]([ .\-]?\d{2}){4}$/
 
 function validate() {
+  errors.projet = ''
   errors.phone = ''
   errors.email = ''
   errors.consent = ''
   let valid = true
+
+  if (!projet.value) {
+    errors.projet = 'Veuillez indiquer votre projet.'
+    valid = false
+  }
 
   const cleanPhone = phone.value.replace(/\s/g, '')
   if (!cleanPhone) {
@@ -157,6 +185,7 @@ async function handleSubmit() {
     const body = {
       ...props.formData,
       source:       props.formData.hors_zone ? 'hors_zone' : 'estimation',
+      projet:       projet.value || null,
       nom:          nom.value?.trim() || null,
       telephone:    phone.value,
       email:        email.value || null,
@@ -193,6 +222,11 @@ async function handleSubmit() {
 
 .required {
   color: var(--color-accent);
+}
+
+.form-select {
+  cursor: pointer;
+  appearance: auto;
 }
 
 .form-optional {

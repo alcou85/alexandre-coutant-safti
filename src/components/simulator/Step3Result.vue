@@ -34,7 +34,10 @@
 
       <!-- Prix : section hero -->
       <div class="price-section">
-        <span class="price-label">Fourchette d'estimation</span>
+        <span class="price-label">
+          Fourchette d'estimation
+          <span v-if="formData.nom_commune" class="price-commune">· {{ formData.nom_commune }}</span>
+        </span>
         <div class="price-range">
           <span class="price-value">{{ formatPrice(result.estimation_min) }}</span>
           <span class="price-dash" aria-hidden="true">–</span>
@@ -70,19 +73,11 @@
           </div>
         </div>
 
-        <!-- Formulaire affiché après clic -->
-        <template v-else-if="showContactForm">
-          <p class="cta-form-intro">Renseignez vos coordonnées et je vous rappelle rapidement.</p>
-          <LeadForm :formData="formDataWithResult" @leadSent="emit('leadSent')" />
-        </template>
-
-        <!-- CTA initial -->
+        <!-- Formulaire affiché directement -->
         <template v-else>
           <p class="cta-lead">Vous souhaitez affiner cette estimation ou connaître la valeur réelle de votre bien sur le marché ?</p>
-          <p class="cta-sub">Notre équipe peut vous accompagner et vous proposer une estimation personnalisée gratuite.</p>
-          <button type="button" class="btn-cta" @click="showContactForm = true">
-            Être recontacté gratuitement
-          </button>
+          <p class="cta-sub">Je peux vous accompagner et vous proposer une estimation personnalisée gratuite.</p>
+          <LeadForm :formData="formDataWithResult" @leadSent="emit('leadSent')" />
         </template>
 
       </div>
@@ -104,7 +99,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import LeadForm from './LeadForm.vue'
 
 const props = defineProps({
@@ -117,8 +112,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['back', 'leadSent'])
-
-const showContactForm = ref(false)
 
 const formDataWithResult = computed(() => ({
   ...props.formData,
@@ -208,6 +201,13 @@ function formatPriceM2(value) {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-muted);
+}
+
+.price-commune {
+  color: var(--color-accent);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .price-range {
@@ -313,12 +313,6 @@ function formatPriceM2(value) {
 
 .btn-cta:hover {
   opacity: 0.88;
-}
-
-.cta-form-intro {
-  font-size: 0.875rem;
-  color: var(--color-muted);
-  margin-bottom: 0;
 }
 
 /* ── Lead success inline ─────────────────── */

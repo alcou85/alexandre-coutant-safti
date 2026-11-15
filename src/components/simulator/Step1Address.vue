@@ -69,6 +69,7 @@ const props = defineProps({
   lon: { type: Number, default: null },
   code_commune: { type: String, default: '' },
   code_postal: { type: String, default: '' },
+  nom_commune: { type: String, default: '' },
   hors_zone: { type: Boolean, default: false },
   horsZoneMode: { type: String, default: 'capture' },
 })
@@ -91,6 +92,7 @@ function onAddressInput(value) {
     lon: null,
     code_commune: '',
     code_postal: '',
+    nom_commune: '',
     hors_zone: false,
   })
 }
@@ -105,6 +107,7 @@ function onAddressSelect(payload) {
     lon: payload.lon,
     code_commune: payload.citycode,
     code_postal: payload.postcode,
+    nom_commune: payload.city || '',
     hors_zone,
   })
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="wizard">
+  <div class="wizard" ref="wizardRef">
     <!-- Progress bar -->
     <div class="progress-bar" aria-label="Progression du simulateur">
       <div
@@ -39,6 +39,7 @@
         :lon="state.lon"
         :code_commune="state.code_commune"
         :code_postal="state.code_postal"
+        :nom_commune="state.nom_commune"
         :hors_zone="state.hors_zone"
         :horsZoneMode="HORS_ZONE_MODE"
         @update="onStep1Update"
@@ -78,7 +79,7 @@
 </template>
 
 <script setup>
-import { reactive, computed } from 'vue'
+import { reactive, computed, ref, nextTick } from 'vue'
 import Step1Address from './Step1Address.vue'
 import Step2Property from './Step2Property.vue'
 import Step3Result from './Step3Result.vue'
@@ -88,7 +89,16 @@ import { computeEstimation } from '@/composables/useEstimation.js'
 // 'block'   = hors-zone users cannot proceed past step 1
 const HORS_ZONE_MODE = 'capture'
 
+const wizardRef = ref(null)
 const stepLabels = ['Adresse', 'Votre bien', 'Estimation']
+
+function scrollToWizard() {
+  nextTick(() => {
+    if (!wizardRef.value) return
+    const top = wizardRef.value.getBoundingClientRect().top + window.scrollY - 80
+    window.scrollTo({ top, behavior: 'smooth' })
+  })
+}
 
 const state = reactive({
   step: 1,
@@ -98,6 +108,7 @@ const state = reactive({
   lon: null,
   code_commune: '',
   code_postal: '',
+  nom_commune: '',
   hors_zone: false,
   // Step 2
   type: 'maison',
@@ -137,6 +148,7 @@ const fullFormData = computed(() => ({
   lon: state.lon,
   code_commune: state.code_commune,
   code_postal: state.code_postal,
+  nom_commune: state.nom_commune,
   hors_zone: state.hors_zone,
 }))
 
@@ -146,11 +158,13 @@ function onStep1Update(payload) {
   state.lon = payload.lon
   state.code_commune = payload.code_commune
   state.code_postal = payload.code_postal
+  state.nom_commune = payload.nom_commune || ''
   state.hors_zone = payload.hors_zone
 }
 
 function goToStep2() {
   state.step = 2
+  scrollToWizard()
 }
 
 function onStep2Update(payload) {
@@ -176,6 +190,7 @@ function sendEstimationNotify(result, formData) {
 async function submitEstimate() {
   state.step = 3
   state.loading = true
+  scrollToWizard()
   state.error = null
   state.result = null
   state.notificationSent = false

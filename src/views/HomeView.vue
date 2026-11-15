@@ -12,10 +12,7 @@
             Une fourchette de prix basée sur les ventes réelles de votre secteur.
             Gratuit, en 2 minutes, sans engagement.
           </p>
-          <p class="hero-geo">
-            Conseiller immobilier indépendant SAFTI basé à La Roche-sur-Yon, j'accompagne
-            les vendeurs et acquéreurs à La Roche-sur-Yon et en Vendée.
-          </p>
+
           <div class="hero-actions">
             <RouterLink to="/estimation" class="btn-primary hero-cta">
               Estimer mon bien

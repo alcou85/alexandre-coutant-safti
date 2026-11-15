@@ -79,11 +79,16 @@
 </template>
 
 <script setup>
-import { reactive, computed, ref, nextTick } from 'vue'
+import { reactive, computed, ref, nextTick, onMounted } from 'vue'
 import Step1Address from './Step1Address.vue'
 import Step2Property from './Step2Property.vue'
 import Step3Result from './Step3Result.vue'
 import { computeEstimation } from '@/composables/useEstimation.js'
+import { ESTIMATION_CONFIG } from '@/config/estimation.js'
+
+const props = defineProps({
+  initialData: { type: Object, default: null },
+})
 
 // 'capture' = hors-zone leads are still captured (contact form shown)
 // 'block'   = hors-zone users cannot proceed past step 1
@@ -126,6 +131,19 @@ const state = reactive({
   result: null,
   leadSent: false,
   notificationSent: false,
+})
+
+onMounted(() => {
+  if (props.initialData?.address && props.initialData?.lat != null) {
+    state.address      = props.initialData.address
+    state.lat          = props.initialData.lat
+    state.lon          = props.initialData.lon
+    state.code_commune = props.initialData.code_commune || ''
+    state.code_postal  = props.initialData.code_postal  || ''
+    state.nom_commune  = props.initialData.nom_commune  || ''
+    state.hors_zone    = !state.code_commune.startsWith(ESTIMATION_CONFIG.COVERED_DEPT)
+    state.step = 2
+  }
 })
 
 const progressWidth = computed(() => {
@@ -249,7 +267,7 @@ async function submitEstimate() {
 
 .progress-track {
   position: absolute;
-  top: 18px;
+  top: 20px;
   left: 0;
   right: 0;
   height: 2px;
@@ -260,7 +278,7 @@ async function submitEstimate() {
 .progress-fill {
   height: 100%;
   background-color: var(--color-accent);
-  transition: width 300ms ease;
+  transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .progress-step {
@@ -273,8 +291,8 @@ async function submitEstimate() {
 }
 
 .progress-step-dot {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -282,15 +300,17 @@ async function submitEstimate() {
   font-size: 0.85rem;
   font-weight: 500;
   border: 2px solid var(--color-border);
-  background-color: var(--color-bg);
+  background-color: var(--color-white);
   color: var(--color-muted);
-  transition: border-color var(--transition), background-color var(--transition), color var(--transition);
+  transition: border-color var(--transition), background-color var(--transition),
+              color var(--transition), box-shadow var(--transition);
 }
 
 .progress-step--active .progress-step-dot {
   border-color: var(--color-accent);
   background-color: var(--color-accent);
   color: var(--color-white);
+  box-shadow: 0 0 0 4px rgba(224, 107, 31, 0.15);
 }
 
 .progress-step--done .progress-step-dot {
@@ -304,7 +324,7 @@ async function submitEstimate() {
 }
 
 .progress-step-label {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--color-muted);
   white-space: nowrap;
 }
@@ -322,14 +342,14 @@ async function submitEstimate() {
 .wizard-panel {
   background-color: var(--color-white);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 1.25rem;
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: 0 4px 24px rgba(28, 43, 58, 0.08);
 }
 
 @media (min-width: 640px) {
   .wizard-panel {
-    padding: 2.5rem;
+    padding: 2.5rem 3rem;
   }
 }
 </style>

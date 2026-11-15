@@ -1,26 +1,10 @@
 <template>
   <main class="local-page">
 
-    <section class="section section--hero">
-      <div class="container">
-        <p class="page-eyebrow">Conseiller immobilier SAFTI · Vendée</p>
-        <h1>Vendre votre bien immobilier en Vendée</h1>
-        <p class="page-intro">
-          De l'estimation au prix juste jusqu'à la signature chez le notaire,
-          je vous accompagne à chaque étape de votre vente à La Roche-sur-Yon
-          et dans toute la Vendée.
-        </p>
-        <div class="hero-actions">
-          <RouterLink to="/estimation" class="btn-primary">Estimer mon bien gratuitement</RouterLink>
-          <RouterLink to="/contact" class="btn-outline">Me contacter</RouterLink>
-        </div>
-      </div>
-    </section>
-
     <!-- Étapes -->
-    <section class="section section--white">
+    <section class="section section--white section--first">
       <div class="container">
-        <h2>Comment se déroule une vente avec moi ?</h2>
+        <h1>Comment se déroule une vente avec moi ?</h1>
         <p class="section-intro">Six étapes pour vendre sereinement et au bon prix.</p>
         <ol class="steps-list">
           <li class="step-item">
@@ -97,48 +81,6 @@
       </div>
     </section>
 
-    <!-- Pourquoi choisir un indépendant -->
-    <section class="section">
-      <div class="container">
-        <h2>Pourquoi choisir un conseiller indépendant SAFTI ?</h2>
-        <div class="services-grid">
-          <div class="service-item">
-            <h3>Un seul interlocuteur du début à la fin</h3>
-            <p>
-              Pas de rotation d'agents, pas de perte d'information entre collègues.
-              Je suis personnellement responsable de votre dossier et vous avez
-              mon contact direct à tout moment.
-            </p>
-          </div>
-          <div class="service-item">
-            <h3>Une estimation honnête, pas une promesse</h3>
-            <p>
-              Certaines agences sur-estiment pour décrocher le mandat, puis
-              demandent une baisse de prix quelques semaines plus tard. Je préfère
-              vous donner une fourchette réaliste dès le départ pour vendre dans
-              les meilleurs délais.
-            </p>
-          </div>
-          <div class="service-item">
-            <h3>Disponible en semaine et le week-end</h3>
-            <p>
-              La plupart des visites se font en soirée ou le week-end. En tant
-              qu'indépendant, j'adapte mes disponibilités aux contraintes des
-              acquéreurs et aux vôtres.
-            </p>
-          </div>
-          <div class="service-item">
-            <h3>La puissance du réseau SAFTI</h3>
-            <p>
-              SAFTI est l'un des premiers réseaux de conseillers immobiliers
-              indépendants en France. Votre bien bénéficie de la visibilité
-              des grands portails nationaux et des outils professionnels du réseau.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section section--cta">
       <div class="container cta-inner">
         <h2>Première étape : estimer votre bien</h2>
@@ -192,26 +134,10 @@ useSeo({
   border-bottom: 1px solid var(--color-border);
 }
 .section:last-child { border-bottom: none; }
-.section--hero { padding-top: 5rem; background-color: var(--color-bg); }
 .section--white { background-color: var(--color-white); }
+.section--first { padding-top: 5rem; }
 
-.page-eyebrow {
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: 0.75rem;
-}
 h1 { margin-bottom: 1.25rem; }
-.page-intro {
-  font-size: 1rem;
-  color: var(--color-muted);
-  max-width: 640px;
-  margin-bottom: 2rem;
-  line-height: 1.7;
-}
-.hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 .section-intro { color: var(--color-muted); margin-bottom: 2rem; font-size: 0.9rem; }
 
 /* Steps */
@@ -245,18 +171,6 @@ h1 { margin-bottom: 1.25rem; }
 .step-body { flex: 1; }
 .step-body h3 { font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--color-primary); }
 .step-body p { font-size: 0.9rem; color: var(--color-muted); line-height: 1.7; margin-bottom: 0; }
-
-/* Services */
-.services-grid { display: grid; gap: 1.5rem; }
-@media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
-.service-item {
-  padding: 1.5rem;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-}
-.service-item h3 { font-size: 1rem; margin-bottom: 0.5rem; color: var(--color-primary); }
-.service-item p { font-size: 0.88rem; color: var(--color-muted); line-height: 1.65; margin-bottom: 0; }
 
 /* CTA */
 .section--cta { background-color: var(--color-primary); border-bottom: none; }

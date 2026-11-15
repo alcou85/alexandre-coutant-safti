@@ -90,8 +90,8 @@ const gbpUrl = SITE.gbpUrl
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  padding-top: 3rem;
-  padding-bottom: 2.5rem;
+  padding-top: 3.5rem;
+  padding-bottom: 3rem;
 }
 
 @media (min-width: 640px) {
@@ -110,10 +110,11 @@ const gbpUrl = SITE.gbpUrl
 
 .footer-name {
   font-family: var(--font-heading);
-  font-size: 1.35rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 500;
   color: var(--color-white);
   margin-bottom: 0.1rem;
+  letter-spacing: -0.01em;
 }
 
 .footer-role {

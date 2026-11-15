@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" :class="{ 'header--scrolled': isScrolled }">
     <div class="container header-inner">
       <!-- Logo -->
       <RouterLink to="/" class="logo" aria-label="Alexandre Coutant – Accueil">
@@ -82,12 +82,13 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { SITE } from '../config/seo.js'
 
 const route = useRoute()
 const menuOpen = ref(false)
+const isScrolled = ref(false)
 const listingsUrl = SITE.saftiProfileUrl
 
 function toggleMenu() {
@@ -97,6 +98,13 @@ function toggleMenu() {
 function closeMenu() {
   menuOpen.value = false
 }
+
+function onScroll() {
+  isScrolled.value = window.scrollY > 8
+}
+
+onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
+onUnmounted(() => window.removeEventListener('scroll', onScroll))
 </script>
 
 <style scoped>
@@ -106,9 +114,17 @@ function closeMenu() {
   left: 0;
   right: 0;
   z-index: 100;
-  background-color: var(--color-white);
-  border-bottom: 1px solid var(--color-border);
+  background-color: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid transparent;
   height: 64px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.header--scrolled {
+  border-bottom-color: var(--color-border);
+  box-shadow: 0 1px 12px rgba(28, 43, 58, 0.07);
 }
 
 .header-inner {

@@ -3,6 +3,7 @@
    ============================================================ */
 :root {
   --color-bg: #F5F2EE;
+  --color-bg-deep: #EAE5DC;
   --color-primary: #1C2B3A;
   --color-accent: #E06B1F;
   --color-accent-dark: #C45819;
@@ -17,15 +18,21 @@
   --color-warning-bg: #fef3c7;
 
   --radius: 6px;
+  --radius-lg: 12px;
   --max-width: 1140px;
+  --max-width-narrow: 760px;
 
   --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
 
+  --font-size-display: clamp(2.6rem, 5.5vw, 4.25rem);
+
   --transition: 200ms ease;
+  --transition-slow: 400ms ease;
 
   --shadow-sm: 0 1px 3px rgba(28, 43, 58, 0.08);
   --shadow-md: 0 4px 16px rgba(28, 43, 58, 0.10);
+  --shadow-lg: 0 8px 48px rgba(28, 43, 58, 0.13);
 }
 
 /* ============================================================
@@ -69,8 +76,8 @@ h6 {
   color: var(--color-primary);
 }
 
-h1 { font-size: clamp(2rem, 5vw, 3.25rem); }
-h2 { font-size: clamp(1.5rem, 3.5vw, 2.25rem); }
+h1 { font-size: clamp(2.1rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); }
 h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
 h4 { font-size: 1.15rem; }
 
@@ -143,7 +150,7 @@ ol {
   border-radius: var(--radius);
   cursor: pointer;
   text-decoration: none;
-  transition: background-color var(--transition), color var(--transition), border-color var(--transition), box-shadow var(--transition);
+  transition: background-color var(--transition), color var(--transition), border-color var(--transition), box-shadow var(--transition), transform var(--transition);
   border: 2px solid transparent;
   white-space: nowrap;
   line-height: 1.4;
@@ -160,6 +167,8 @@ ol {
   background-color: var(--color-accent-dark);
   border-color: var(--color-accent-dark);
   color: var(--color-white);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(224, 107, 31, 0.3);
 }
 
 .btn-outline {

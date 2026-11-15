@@ -191,12 +191,16 @@ function formatPriceM2(value) {
 .price-section {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  padding-bottom: 1.25rem;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--color-accent);
 }
 
 .price-label {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -214,27 +218,27 @@ function formatPriceM2(value) {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.4rem;
 }
 
 .price-value {
   font-family: var(--font-heading);
-  font-size: clamp(1.75rem, 8vw, 2.6rem);
+  font-size: clamp(2rem, 9vw, 3.25rem);
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--color-primary);
   line-height: 1;
 }
 
 .price-dash {
   font-family: var(--font-heading);
-  font-size: clamp(1.2rem, 5vw, 1.8rem);
+  font-size: clamp(1.4rem, 6vw, 2.2rem);
   color: var(--color-border);
   line-height: 1;
 }
 
 .price-note {
   font-style: italic;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--color-muted);
   margin-bottom: 0;
 }
@@ -242,8 +246,8 @@ function formatPriceM2(value) {
 /* ── Stats ───────────────────────────────── */
 .stats-row {
   display: flex;
-  gap: 1.5rem;
-  padding-bottom: 1.25rem;
+  gap: 1.75rem;
+  padding-bottom: 1.5rem;
   flex-wrap: wrap;
 }
 
@@ -254,9 +258,9 @@ function formatPriceM2(value) {
 }
 
 .stat-label {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   color: var(--color-muted);
   font-weight: 500;
 }

@@ -138,9 +138,9 @@ import { useSeo } from '../composables/useSeo.js'
 import { SITE } from '../config/seo.js'
 
 useSeo({
-  title: 'Estimation immobilière gratuite en Vendée',
+  title: 'Estimation immobilière Vendée – Simulateur gratuit en ligne',
   description:
-    "Estimez gratuitement votre bien immobilier en Vendée. Alexandre Coutant, conseiller SAFTI à La Roche-sur-Yon, vous fournit une fourchette de prix basée sur les ventes réelles de votre secteur.",
+    "Obtenez une estimation précise de votre bien en Vendée en 2 minutes. Simulateur basé sur les ventes réelles de votre secteur. Gratuit, sans inscription – Alexandre Coutant, conseiller SAFTI à La Roche-sur-Yon.",
   canonical: SITE.url,
   jsonLd: [
     {

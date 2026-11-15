@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { SITE } from '../config/seo.js'
 
 const routes = [
   {
@@ -94,8 +95,7 @@ const routes = [
   {
     path: '/biens-a-vendre',
     beforeEnter: () => {
-      const url = import.meta.env.VITE_SAFTI_LISTINGS_URL || '/'
-      window.location.href = url
+      window.location.href = SITE.saftiProfileUrl
       return false
     },
     component: () => import('../views/HomeView.vue'), // never rendered

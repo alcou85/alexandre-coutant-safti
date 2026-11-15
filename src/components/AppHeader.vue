@@ -84,10 +84,11 @@
 <script setup>
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { SITE } from '../config/seo.js'
 
 const route = useRoute()
 const menuOpen = ref(false)
-const listingsUrl = import.meta.env.VITE_SAFTI_LISTINGS_URL || '/'
+const listingsUrl = SITE.saftiProfileUrl
 
 function toggleMenu() {
   menuOpen.value = !menuOpen.value

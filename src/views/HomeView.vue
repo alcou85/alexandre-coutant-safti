@@ -87,32 +87,6 @@
       </div>
     </section>
 
-    <!-- Témoignages -->
-    <section class="section testimonials-section">
-      <div class="container">
-        <header class="testimonials-header">
-          <h2 class="section-title">Ce que disent mes clients</h2>
-          <p class="section-intro">
-            4,8 / 5 · 6 avis Google
-          </p>
-        </header>
-        <div class="testimonials-grid">
-          <blockquote class="testimonial-card" v-for="t in testimonials" :key="t.name">
-            <div class="testimonial-stars" aria-label="5 étoiles sur 5">★★★★★</div>
-            <p class="testimonial-text">{{ t.text }}</p>
-            <footer class="testimonial-footer">
-              <span class="testimonial-name">{{ t.name }}</span>
-              <span class="testimonial-location">{{ t.location }}</span>
-            </footer>
-          </blockquote>
-        </div>
-        <p class="testimonials-source">
-          <a href="https://www.safti.fr/votre-conseiller-safti/alexandre-coutant" target="_blank"
-            rel="noopener noreferrer" class="testimonials-link">Voir tous les avis</a>
-        </p>
-      </div>
-    </section>
-
     <!-- Actualités immobilières -->
     <section class="section articles-section">
       <div class="container">
@@ -203,25 +177,6 @@ useSeo({
 })
 
 const latestArticles = getLatestArticles(3)
-
-// Remplacer par vos vrais avis Google / SAFTI
-const testimonials = [
-  {
-    name: 'Sophie M.',
-    location: 'La Roche-sur-Yon',
-    text: "Alexandre a su estimer notre maison au juste prix. La vente s'est conclue en moins de 6 semaines, sans stress. Un vrai professionnel, disponible et à l'écoute.",
-  },
-  {
-    name: 'Patrick L.',
-    location: 'La Roche-sur-Yon',
-    text: "Très sérieux et réactif. Il connaît parfaitement le marché local et nous a guidés à chaque étape. Je recommande sans hésitation.",
-  },
-  {
-    name: 'Nathalie D.',
-    location: 'La Roche-sur-Yon',
-    text: "Estimation conforme aux ventes du quartier, conseils clairs sur la mise en valeur du bien. Alexandre a tenu ses engagements du début à la fin.",
-  },
-]
 
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('fr-FR', {
@@ -407,81 +362,6 @@ function formatDate(dateStr) {
 .how-cta {
   display: flex;
   justify-content: center;
-}
-
-/* ── Témoignages ───────────────────────────────────── */
-.testimonials-section {
-  background-color: var(--color-white);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.testimonials-header {
-  margin-bottom: 2.5rem;
-}
-
-.testimonials-grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
-@media (min-width: 640px) {
-  .testimonials-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.testimonial-card {
-  margin: 0;
-  padding: 1.5rem;
-  background-color: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.testimonial-stars {
-  color: var(--color-accent);
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-}
-
-.testimonial-text {
-  font-size: 0.9rem;
-  color: var(--color-muted);
-  line-height: 1.65;
-  font-style: italic;
-  margin-bottom: 0;
-  flex: 1;
-}
-
-.testimonial-footer {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-}
-
-.testimonial-name {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--color-primary);
-}
-
-.testimonial-location {
-  font-size: 0.75rem;
-  color: var(--color-muted);
-}
-
-.testimonials-source {
-  margin-top: 1.5rem;
-  text-align: center;
-  font-size: 0.85rem;
-}
-
-.testimonials-link {
-  color: var(--color-accent);
-  text-decoration: underline;
 }
 
 /* ── Actualités ────────────────────────────────────── */

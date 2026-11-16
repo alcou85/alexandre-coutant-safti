@@ -74,12 +74,18 @@ async function fetchDepartement(supabase, typeLocal, cutoffDate) {
   return data ?? []
 }
 
-// ─── Calcul estimation ───────────────────────────────────────────────────────
+// ─── Calcul prix/m² ──────────────────────────────────────────────────────────
 
-function computePricesPerM2(rows) {
+// Bornes absolues pour éviter les anomalies DVF (lots multiples, dépendances mal classées)
+const PRICE_MIN = 400
+const PRICE_MAX = 12000
+
+function computePricesPerM2(rows, typeLocal) {
+  const minSurface = typeLocal === 'Maison' ? 25 : 9
   return rows
+    .filter(r => Number(r.surface_reelle_bati) >= minSurface)
     .map(r => Number(r.valeur_fonciere) / Number(r.surface_reelle_bati))
-    .filter(p => p > 0 && isFinite(p))
+    .filter(p => p >= PRICE_MIN && p <= PRICE_MAX && isFinite(p))
 }
 
 function terrainBonus(terrainM2) {
@@ -89,6 +95,15 @@ function terrainBonus(terrainM2) {
     if (terrainM2 >= b.min) return b.bonus
   }
   return 0
+}
+
+// Facteur correctif selon la taille du bien
+function getSizeFactor(type, surface) {
+  const brackets = C.SIZE_FACTORS[type] ?? C.SIZE_FACTORS.maison
+  for (const { max, factor } of brackets) {
+    if (surface <= max) return factor
+  }
+  return brackets[brackets.length - 1].factor
 }
 
 function roundToThousand(n) {
@@ -106,7 +121,7 @@ export default async function handler(req, res) {
   if (!body) return res.status(400).json({ error: 'Corps de requête manquant' })
 
   // Honeypot
-  if (!validateHoneypot(body)) return res.status(200).json({ success: true }) // silencieux
+  if (!validateHoneypot(body)) return res.status(200).json({ success: true })
 
   // Rate limiting
   const supabase = getSupabaseAdmin()
@@ -118,7 +133,7 @@ export default async function handler(req, res) {
   if (!allowed) return res.status(429).json({ error: 'Trop de requêtes, réessayez dans quelques minutes.' })
 
   // Validation des champs obligatoires
-  const { type, surface, etat, lat, lon, code_commune, code_postal } = body
+  const { type, surface, etat, lat, lon, code_commune } = body
   if (!type || !surface || !etat || !lat || !lon || !code_commune) {
     return res.status(400).json({ error: 'Champs obligatoires manquants' })
   }
@@ -160,7 +175,8 @@ export default async function handler(req, res) {
     dataSource = 'departement'
   }
 
-  const rawPrices = computePricesPerM2(rows)
+  // Nettoyage : bornes absolues + IQR (protège contre les anomalies DVF)
+  const rawPrices     = computePricesPerM2(rows, typeLocal)
   const cleanedPrices = removeOutliers(rawPrices)
   const nb_comparables = cleanedPrices.length
 
@@ -170,7 +186,10 @@ export default async function handler(req, res) {
 
   const prixM2Median = median(cleanedPrices)
 
-  // Coefficients
+  // Facteur de taille
+  const sizeFactor = getSizeFactor(type, Number(surface))
+
+  // Coefficients état + caractéristiques
   let coeff = C.CONDITION_COEFF[etat] ?? 1.0
   if (type === 'maison') {
     if (body.plain_pied) coeff *= (1 + C.PLAIN_PIED_BONUS)
@@ -178,7 +197,7 @@ export default async function handler(req, res) {
     if (body.terrain)    coeff *= (1 + terrainBonus(Number(body.terrain)))
   }
 
-  const prixBase = prixM2Median * Number(surface) * coeff
+  const prixBase = prixM2Median * Number(surface) * coeff * sizeFactor
   const range = nb_comparables < C.MIN_COMPARABLES ? C.WIDE_RANGE : C.DEFAULT_RANGE
 
   return res.status(200).json({

@@ -7,8 +7,10 @@
  *
  * Ce script :
  *  1. Télécharge le CSV DVF du dept. 85
- *  2. Insère les ventes filtrées dans Supabase
- *  3. Génère public/prix-m2.json (prix médians par commune/type)
+ *  2. Groupe les lignes par id_mutation+type_local pour éviter le double-comptage
+ *     (une vente maison+dépendance a la même valeur_foncière sur chaque lot)
+ *  3. Insère les ventes filtrées dans Supabase
+ *  4. Génère public/prix-m2.json (prix médians par commune/type)
  *     → utilisé par le simulateur client-side, sans appel API
  */
 
@@ -29,6 +31,13 @@ const DRY_RUN     = process.argv.includes('--dry-run')
 const BATCH_SIZE  = 200
 const TYPES_LOCAUX    = ['Maison', 'Appartement']
 const NATURE_MUTATION = 'Vente'
+
+// Bornes absolues pour le prix/m² (protège contre les anomalies DVF)
+const PRICE_PER_M2_MIN = 400   // €/m² minimum réaliste en Vendée
+const PRICE_PER_M2_MAX = 12000 // €/m² maximum réaliste en Vendée
+
+// Surface minimale pour être considéré comme un bien principal (pas une dépendance)
+const MIN_SURFACE = { Maison: 25, Appartement: 9 }
 
 const DVF_URL_GZ  = `https://files.data.gouv.fr/geo-dvf/latest/csv/${YEAR}/departements/85.csv.gz`
 const DVF_URL_CSV = `https://files.data.gouv.fr/geo-dvf/latest/csv/${YEAR}/departements/85.csv`
@@ -171,30 +180,64 @@ async function ingest() {
 
   const rl = readline.createInterface({ input: createReadStream(TMP_FILE), crlfDelay: Infinity })
 
-  let headers  = null
-  let batch    = []
-  let total    = 0
-  let skipped  = 0
-  let errors   = 0
-  const rawStats = {} // 'INSEE|Type' → [prix_m2]
+  let headers = null
+  let skipped = 0
+
+  // ── Groupement par mutation ──
+  // Clé : `id_mutation|type_local`
+  // On conserve uniquement le lot avec la plus grande surface pour chaque
+  // couple (mutation, type). Cela évite le double-comptage de la valeur
+  // foncière sur les ventes incluant une dépendance classée comme Maison.
+  const mutationMap = new Map()
 
   for await (const line of rl) {
     if (!line.trim()) continue
     if (!headers) { headers = line.split(',').map(h => h.trim().replace(/^"|"$/g, '')); continue }
 
-    const row     = parseLine(headers, line)
+    const row = parseLine(headers, line)
     if (row.nature_mutation !== NATURE_MUTATION)  { skipped++; continue }
     if (!TYPES_LOCAUX.includes(row.type_local))    { skipped++; continue }
-    if (toInt(row.nombre_lots) !== 1)              { skipped++; continue }
 
     const surface = toNum(row.surface_reelle_bati)
     const valeur  = toNum(row.valeur_fonciere)
-    if (!surface || surface <= 0 || !valeur || valeur <= 0) { skipped++; continue }
 
-    // Accumuler pour les stats
+    // Rejeter les surfaces trop petites (dépendances, garages classés comme bien principal)
+    const minSurf = MIN_SURFACE[row.type_local] ?? 9
+    if (!surface || surface < minSurf || !valeur || valeur <= 0) { skipped++; continue }
+
+    const mutId  = row.id_mutation
+    const mapKey = mutId ? `${mutId}|${row.type_local}` : null
+
+    if (!mapKey) {
+      // Pas d'id_mutation : traiter comme mutation unique
+      const pricePerM2 = valeur / surface
+      if (pricePerM2 < PRICE_PER_M2_MIN || pricePerM2 > PRICE_PER_M2_MAX) { skipped++; continue }
+      mutationMap.set(Symbol(), { row, surface, valeur })
+      continue
+    }
+
+    const existing = mutationMap.get(mapKey)
+    if (!existing || surface > existing.surface) {
+      mutationMap.set(mapKey, { row, surface, valeur })
+    }
+    // Ignorer les lots de surface inférieure pour la même mutation
+  }
+
+  console.log(`✓  ${mutationMap.size} mutations uniques après groupement (${skipped} lignes ignorées)`)
+
+  // ── Filtrage final + accumulation des stats ──
+  let batch    = []
+  let total    = 0
+  let errors   = 0
+  const rawStats = {} // 'INSEE|Type' → [prix_m2]
+
+  for (const { row, surface, valeur } of mutationMap.values()) {
+    const pricePerM2 = valeur / surface
+    if (pricePerM2 < PRICE_PER_M2_MIN || pricePerM2 > PRICE_PER_M2_MAX) { skipped++; continue }
+
     const key = `${row.code_commune}|${row.type_local}`
     if (!rawStats[key]) rawStats[key] = []
-    rawStats[key].push(valeur / surface)
+    rawStats[key].push(pricePerM2)
 
     batch.push({
       date_mutation:             toDate(row.date_mutation),

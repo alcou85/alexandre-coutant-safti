@@ -19,6 +19,16 @@ function terrainBonus(m2) {
   return 0
 }
 
+// Facteur correctif selon la taille : les petits biens commandent un €/m² plus
+// élevé, les grands biens un €/m² plus faible (diminishing returns).
+function getSizeFactor(type, surface) {
+  const brackets = C.SIZE_FACTORS[type] ?? C.SIZE_FACTORS.maison
+  for (const { max, factor } of brackets) {
+    if (surface <= max) return factor
+  }
+  return brackets[brackets.length - 1].factor
+}
+
 function roundToThousand(n) {
   return Math.round(n / 1000) * 1000
 }
@@ -40,17 +50,29 @@ export async function computeEstimation(params) {
   let prix_m2_median, nb_comparables, usedFallback
 
   if (communeData && communeData.count >= C.MIN_COMPARABLES) {
-    prix_m2_median  = communeData.median
-    nb_comparables  = communeData.count
-    usedFallback    = false
+    // Données locales suffisantes : utiliser le prix médian de la commune
+    prix_m2_median = communeData.median
+    nb_comparables = communeData.count
+    usedFallback   = false
   } else {
-    // Fallback département
-    prix_m2_median  = deptData?.median ?? 2000
-    nb_comparables  = deptData?.count  ?? 0
-    usedFallback    = true
+    // Pas assez de données locales : fallback zone-based
+    // Communes littorales → médiane départementale (littoral inclus)
+    // Communes intérieures → tarif rural (moins biaisé vers le littoral)
+    const isCoastal = C.COASTAL_COMMUNES.has(String(code_commune))
+    if (isCoastal) {
+      prix_m2_median = deptData?.median ?? 3500
+    } else {
+      prix_m2_median = C.RURAL_FALLBACK[typeLocal] ?? 2100
+    }
+    // nb_comparables = 0 : indique à l'UI que les données locales sont insuffisantes
+    nb_comparables = 0
+    usedFallback   = true
   }
 
-  // Coefficients
+  // Facteur de taille (diminution du €/m² pour les grands biens)
+  const sizeFactor = getSizeFactor(type, Number(surface))
+
+  // Coefficients état + caractéristiques
   let coeff = C.CONDITION_COEFF[etat] ?? 1.0
   if (type === 'maison') {
     if (plain_pied) coeff *= (1 + C.PLAIN_PIED_BONUS)
@@ -58,7 +80,7 @@ export async function computeEstimation(params) {
     if (terrain)    coeff *= (1 + terrainBonus(Number(terrain)))
   }
 
-  const prixBase = prix_m2_median * Number(surface) * coeff
+  const prixBase = prix_m2_median * Number(surface) * coeff * sizeFactor
   const range    = usedFallback ? C.WIDE_RANGE : C.DEFAULT_RANGE
 
   return {
